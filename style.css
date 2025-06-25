@@ -1,0 +1,23 @@
+body{
+    margin:0;
+    padding:0;
+    text-align:center;
+
+}
+.box{
+    width:100%;
+}
+.toparea{
+    background:grey;
+    padding:10px 0;
+}
+.logoarea{
+    padding:50px 0;
+    background:#fff;
+}
+.logoarea img{
+    width:110px;
+}
+.catagory{
+    padding:50px 0;
+}
