@@ -1,0 +1,205 @@
+
+.body{
+    margin:0;
+    padding:0;
+    text-align:center;
+}
+.box{
+    width:100%;
+}
+
+.category{
+    width:100%;
+    height:350px;
+    background: #fff;
+}
+.category .col{
+    width:250px;
+    height:300px;
+    background: #fff;
+    float:left;
+    margin-top:20px;
+    margin-left:5px;
+    text-align: center;
+
+
+}
+.category .col img{
+    width:250px;
+    height:250px;
+    border-radius: 5px;
+}
+.lable{
+    width:100%;
+    height:300px;
+    background:#fff;
+}
+.lable .col img{
+    width:100%;
+    height:200px;
+    margin-top:50px;
+}
+
+
+.diamondarea {
+    width:100%;
+    height:800px;
+    background: #fff;
+}
+
+.diamondarea .col{
+    width:600px;
+    height:800px;
+    float: left;
+    background:#fff;
+    margin-left:20px;
+    text-align: center;
+}
+.diamondarea .col img{
+    width:600px;
+    height:600px;
+    bottom:0;
+    overflow:hidden;
+}
+.diamondarea .col img:hover{
+    border-radius:25px;
+}
+.parea1{
+    margin:50px;
+}
+.parea1 button{
+    background:#0C1337;
+    color:#fff;
+    border-radius: 5px;
+}
+.parea1 button:hover{
+    color:#0C1337;
+    background:#fff;
+    box-shadow: 2px 2px 1px 1px #0C1337;
+}
+
+.parea2{
+    margin:50px;
+}
+
+.bannerarea{
+    width:100%;
+    height:400px;
+    background: #fff;
+}
+.bannerarea img{
+    width:100%;
+    height:400px;
+}
+
+.bydefault-image1{
+    width:270px;
+    height:270px;
+    background-size:cover;
+    background-position: center;
+    background-image: url("jewel6.webp");
+}
+.bydefault-image1:hover{
+    background-image: url("jewel66.jpg");
+}
+
+.bydefault-image2{
+    width:270px;
+    height:270px;
+    background-size:cover;
+    background-position: center;
+    background-image: url("jewel7.webp");
+}
+.bydefault-image2:hover{
+    background-image: url("jewel77.jpg");
+}
+
+.bydefault-image3{
+    width:270px;
+    height:270px;
+    background-size:cover;
+    background-position: center;
+    background-image: url("jewel8.webp");
+}
+.bydefault-image3:hover{
+    background-image: url("jewel88.jpg");
+}
+
+.bydefault-image4{
+    width:270px;
+    height:270px;
+    background-size:cover;
+    background-position: center;
+    background-image: url("jewel9.webp");
+}
+.bydefault-image4:hover{
+    background-image: url("jewel99.jpg");
+}
+
+.bydefault-image5{
+    width:270px;
+    height:270px;
+    background-size:cover;
+    background-position: center;
+    background-image: url("jewel10.webp");
+}
+.bydefault-image5:hover{
+    background-image: url("jewel10.jpg");
+}
+
+.container6{
+    width:100%;
+    padding:20px;
+    text-align:center;
+}
+
+.click2 button{
+    width:200px;
+    height:50px;
+    color:#fff;
+    background:#0C1337;
+    justify-content:center;
+    margin-top:10px;
+    border-radius:5px;
+}
+.click2 button:hover{
+    color:#0C1337;
+    background: #fff;
+    box-shadow:2px 2px 1px 1px #0C1337;
+}
+.p{
+    width:600px;
+    height:600px;
+    position:relative;
+    background: red;
+    overflow:hidden;
+}
+
+.photo1{
+    border-radius:5px;
+    position:absolute;
+}
+.photo1 img{
+    width:100%;
+    height:100%;
+    
+    }
+.photo1:hover{
+    border-radius:0;
+    transform: scale(1.1);
+    
+}
+
+.photo2{
+    border-radius:5px;
+    position:absolute;
+}
+
+.photo2 img{
+    width:100%;
+    height:100%;
+}
+.photo2:hover{
+    border-radius: 0;
+    transform:scale(1.1);
+}

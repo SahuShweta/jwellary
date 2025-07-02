@@ -1,0 +1,1740 @@
+<!DOCTYPE html>
+<!-- saved from url=(0134)https://form-ext.contlo.com//form_view/mobile/9d938511977b4539ad71e430f3600230/313503/_/_/_/bagh-e-fiza-green-beads-earrings/?gc=india -->
+<html lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>Contlo App</title>
+  <link rel="icon" href="https://form-ext.contlo.com/favicon.ico" type="image/png" sizes="16x16">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="csrf-param" content="authenticity_token">
+<meta name="csrf-token" content="PswYsHFMe_vZ32PsOIY1OCNAGMQ8efJfMzvXV5PMQsk4owQKsBp3m_bLf43keyRS7G8PZVeZmEppBXHGKySQ1w">
+  
+  <script src="./jquery.min(1).js.download"></script>
+  <!-- for dropdowns -->
+  <script src="./popper.min.js.download"></script>
+
+  <script src="./jquery-ui.js.download"></script>
+  <link rel="stylesheet" href="./bootstrap.min.css">
+  <link rel="stylesheet" href="./font-awesome.min.css">
+  <link rel="stylesheet" href="./bootstrap-select.min.css">
+
+
+  <link href="./css" rel="stylesheet" type="text/css">
+  <link href="./css(1)" rel="stylesheet" type="text/css">
+  <link href="./css(2)" rel="stylesheet" type="text/css">
+  <link href="./css(3)" rel="stylesheet" type="text/css">
+  <link href="./css2(1)" rel="stylesheet" type="text/css">
+  <link href="./css2(2)" rel="stylesheet" type="text/css">
+  <link href="./css2(3)" rel="stylesheet" type="text/css">
+  <link href="./css2(4)" rel="stylesheet">
+  <link href="./css2(5)" rel="stylesheet">
+  <link href="./css2(6)" rel="stylesheet">
+  <link href="./css2(7)" rel="stylesheet">
+  <link href="./css2(8)" rel="stylesheet">
+  <link href="./css2(9)" rel="stylesheet">
+  <script src="./moment.min.js.download"></script>
+  <script src="./bootstrap.min(1).js.download"></script>
+  <script src="./bootstrap-datetimepicker.min.js.download"></script>
+  <script src="./bootstrap-select.min.js.download"></script>
+  <link rel="stylesheet" href="./bootstrap-datetimepicker.min.css">
+
+  <link rel="stylesheet" href="./popup-cbad18cbc43cc2a9b2856be6fc5b58c1bea95218f350aa056de844c07949e083.css" media="all" data-turbolinks-track="reload">
+  <style>
+      body {
+          font-family: Arial, sans-serif;
+      }
+  </style>
+</head>
+<body style="background-color: transparent;" class="iti-mobile">
+<script>
+    function closeForm(action, form_step_id, form_id, form_type, display_timing) {
+        let message = {
+            source: 'contlo_form',
+            type: 'contlo_form_close',
+            status: action,
+            form_step_id: form_step_id,
+            form_id: form_id,
+            form_type: form_type,
+            display_timing: display_timing
+        };
+        
+        window.top.postMessage(message, "*");
+    }
+
+    function closeFormTeaser(action, form_step_id, form_id) {
+        let message = {
+            source: 'contlo_form',
+            type: 'contlo_form_teaser_close',
+            status: action,
+            form_step_id: form_step_id,
+            form_id: form_id
+        };
+        
+        window.top.postMessage(message, "*");
+    }
+
+    function closePushPopup(action) {
+        let message = {
+            source: 'contlo_popup',
+            type: 'contlo_push_popup_close',
+            status: action
+        };
+        
+        window.top.postMessage(message, "*");
+    }
+
+    function getCoords(elem) {
+        let box = elem.getBoundingClientRect()
+        return {
+            top: box.top + window.pageYOffset,
+            right: box.right + window.pageXOffset,
+            bottom: box.bottom + window.pageYOffset,
+            left: box.left + window.pageXOffset
+        };
+    }
+
+
+    function onPageLoad() {
+        let containerElement = document.getElementsByClassName("top_wrapper")[0]
+        if (typeof containerElement === 'undefined') {
+            return;
+        }
+
+        let coord = getCoords(containerElement)
+        let divWidth = (coord.right - coord.left);
+        let divHeight = (coord.bottom - coord.top);
+        let message = {
+            source: 'contlo_forms',
+            type: 'contlo_form_resize',
+            height: divHeight,
+            width: divWidth
+        };
+        
+        window.top.postMessage(message, "*");
+    }
+
+
+    let FormEvent = {
+        sendEvent: function (public_key, event_type, form_id, form_step_id, device_type) {
+            let message = {
+                source: 'contlo_forms',
+                type: 'contlo_forms_event',
+                data: {
+                    public_key: public_key,
+                    event_type: event_type,
+                    form_step_id: form_step_id,
+                    form_id: form_id,
+                    device_type: device_type
+                }
+            };
+
+            
+            window.top.postMessage(message, "*");
+        },
+        sendNextPageEvent: function (public_key, external_user_id, next_url, form_type, display_timing) {
+            let message = {
+                source: 'contlo_form',
+                type: 'contlo_form_next',
+                form_type: form_type,
+                display_timing: display_timing,
+                data: {
+                    public_key: public_key,
+                    external_user_id: external_user_id,
+                    next_url: next_url,
+                }
+            };
+
+            
+            window.top.postMessage(message, "*");
+        },
+
+        sendPushAcceptEvent: function (public_key) {
+            let message = {
+                source: 'contlo_popup',
+                type: 'contlo_push_accept',
+                data: {public_key: public_key
+                }
+            };
+
+            
+            window.top.postMessage(message, "*");
+        }
+    }
+
+    let ApiResponseEvent = {
+        sendNextEvent: function (public_key, event_type, channel, device_type) {
+            let message = {
+                source: 'contlo_popup',
+                type: 'contlo_popup_event',
+                data: {
+                    public_key: public_key,
+                    external_user_id: external_user_id,
+                    next_url: next_url
+                }
+            };
+
+            
+            window.top.postMessage(message, "*");
+        }
+    }
+
+    let CookieHandler = {
+        setCookie: function (c_name, value, exdays) {
+            let exdate = new Date();
+
+            exdate.setDate(exdate.getDate() + exdays);
+            let c_value = escape(value) + ";path=/;SameSite=None; Secure" + ((exdays == null) ? "" : "; expires=" + exdate.toUTCString());
+            document.cookie = c_name + "=" + c_value;
+        },
+
+        getCookie: function (c_name) {
+            let i, x, y, ARRcookies = document.cookie.split(";");
+            for (i = 0; i < ARRcookies.length; i++) {
+                x = ARRcookies[i].substr(0, ARRcookies[i].indexOf("="));
+                y = ARRcookies[i].substr(ARRcookies[i].indexOf("=") + 1);
+                x = x.replace(/^\s+|\s+$/g, "");
+                if (x === c_name) {
+                    return unescape(y);
+                }
+            }
+            return null;
+        }
+    }
+
+    window.mobileCheck = function () {
+        let check = false;
+        (function (a) {
+            if (/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino/i.test(a) || /1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(a.substr(0, 4))) check = true;
+        })(navigator.userAgent || navigator.vendor || window.opera);
+        return check;
+    };
+
+    function getChannel() {
+        return (window.mobileCheck() ? 'mobile' : 'desktop')
+    }
+</script>
+
+<style>
+    .iti--allow-dropdown {
+        width: 100%;
+        height: 100%;
+    }
+
+    .iti--allow-dropdown input {
+        width: 100%;
+        height: 100%;
+    }
+
+    .form_row {
+        width: 100%;
+    }
+
+    .form_col {
+        width: 100%;
+    }
+
+    .form-group {
+        margin-bottom: 0 !important;
+    }
+
+    .form_content_container p {
+        margin-bottom: 0 !important;
+    }
+
+    .form_body {
+        height: auto;
+        width: 320px;
+        min-width: 320px;
+    }
+
+
+    .popup_header {
+        padding-right: 10px;
+        padding-top: 4px;
+    }
+
+    .main_container {
+        max-width: 100%;
+        max-height: 100%;
+        height: 100%;
+    }
+
+    .form_wrapper {
+        padding-left: 32px;
+        padding-right: 32px;
+        flex-grow: 1;
+    }
+
+    .image_wrapper {
+        overflow: hidden;
+        flex-grow: 0;
+        flex-shrink: 0;
+        width: 50%;
+        max-width: 50%;
+        height: auto;
+    }
+
+    /* .image_wrapper img {
+      height: 100%;
+    } */
+
+    .top_wrapper {
+        position: relative;
+        height: 100%;
+    }
+
+    .top_wrapper .popup_header {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+    }
+
+
+    .top_wrapper {
+        position: relative;
+        height: 100%;
+    }
+
+    .top_wrapper.has_image .main_container {
+        margin-top: 24px;
+        display: flex;
+    }
+
+    .top_wrapper.has_image .popup_header {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+    }
+
+    .top_wrapper.has_image .main_container {
+        margin-top: 0;
+        padding: 0 0 0 0;
+    }
+
+    .top_wrapper.has_image .form_wrapper {
+        margin-top: 24px;
+        padding: 20px 5% 20px;
+    }
+
+    .top_wrapper.has_image .popup_header {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+    }
+
+    .top_wrapper.has_image .heading {
+        font-size: 2.5rem;
+    }
+
+    .top_wrapper:not(.has_image) .image_wrapper {
+        display: none;
+    }
+
+    .close_icon {
+        float: right;
+        opacity: 1;
+        z-index: 10;
+        position: absolute;
+        right: 0;
+        top: 0;
+        cursor: pointer;
+    }
+
+    .close_icon:hover,
+    .close_icon:focus {
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    .step_element {
+        /*padding: 20px;*/
+        /*padding: 5px 5px 5px 5px;*/
+        width: 100%;
+        /*margin: 6px;*/
+        font-size: 16px
+    }
+
+    .step_btn {
+        cursor: pointer;
+        border-width: 0;
+        min-height: 40px;
+        color: #ffffff;
+        background-color: #428bca;
+        border-color: #357ebd;
+    }
+
+    .step_input_text {
+        width: 100%;
+        border: 1px solid #aaaaaa;
+        border-radius: 2px;
+        height: 40px;
+        padding-left: 10px;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus,
+    button:focus {
+        outline: none;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: transparent;
+    }
+
+    * {
+        -ms-overflow-style: none; /* Internet Explorer 10+ */
+        scrollbar-width: none; /* Firefox */
+    }
+
+    ::-webkit-scrollbar {
+        width: 0;
+        background: transparent;
+    }
+
+    @keyframes pop_up_animation {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+
+    @keyframes left_slide_animation {
+        from {
+            opacity: 0;
+            transform: translateX(-500px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
+    @keyframes right_slide_animation {
+        from {
+            opacity: 0;
+            transform: translateX(500px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
+    @keyframes top_slide_animation {
+        from {
+            opacity: 0;
+            transform: translateY(-500px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes bottom_slide_animation {
+        from {
+            opacity: 0;
+            transform: translateY(500px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .form_popup {
+        animation: pop_up_animation 0.3s both;
+    }
+
+    .form_left {
+        animation: left_slide_animation 0.8s both;
+    }
+
+    .form_right {
+        animation: right_slide_animation 0.8s both;
+    }
+
+    .form_top {
+        animation: top_slide_animation 0.8s both;
+    }
+
+    .form_bottom {
+        animation: bottom_slide_animation 0.8s both;
+    }
+
+    .text-block {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+    }
+
+    .text-block.title {
+        -webkit-line-clamp: 1;
+        line-clamp: 1;
+    }
+
+    .text-block.description {
+        -webkit-line-clamp: 2;
+        line-clamp: 2;
+    }
+
+    @media screen and (max-width: 767px) {
+        input, select, textarea {
+            font-size: 16px !important;
+        }
+    }
+
+    #wheel.left_side {
+        position: absolute;
+        left: -300px;
+        width: 600px !important;
+        height: 600px !important;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    #wheel.right_side {
+        position: absolute;
+        right: -300px;
+        width: 600px !important;
+        height: 600px !important;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    #wheel .spin_arrow {
+        /* transform: translate(73px, -130px) rotate(-15deg); */
+        transform: translate(280px, 40px) rotate(0deg);
+        filter: drop-shadow(-3px 4px 0px rgba(0, 0, 0, 0.25));
+    }
+
+    #wheel.right_side .spin_arrow {
+        transform: translate(36px, 70px) rotate(-100deg);
+        filter: drop-shadow(-2px -2px 0px rgba(0, 0, 0, 0.25));
+        /* transform: translate(-125px, -90px) rotate(-100deg); */
+    }
+
+    .center_circle {
+        filter: drop-shadow(4px 3px 0px rgba(0, 0, 0, 0.25));
+    }
+
+    .right_center_circle {
+        filter: drop-shadow(-3px 3px 0px rgba(0, 0, 0, 0.25));
+    }
+
+    .chartholder_right {
+        filter: drop-shadow(-2px 1px 0px #cccccc) !important;
+    }
+
+    .chartholder {
+        filter: drop-shadow(3px 2.5px 0px #cccccc) !important;
+    }
+
+    .form_wheel_wrapper {
+        width: 80%;
+        height: 100%;
+        padding: 0px;
+        margin-left: -15px;
+        margin-right: -15px;
+    }
+
+    .wheel_right {
+        margin-left: 19%;
+        margin-right: -15px;
+    }
+
+    .form_wheel_wrapper .top_wrapper {
+        border-radius: 0 !important;
+    }
+
+    .form_wheel_wrapper .form_popup {
+        width: 100% !important;
+        height: 100%;
+    }
+
+    .form_wheel_wrapper .wheel_wrapper,
+    .form_wheel_wrapper .form_content_container {
+        position: relative;
+        width: 50%;
+        min-width: 50%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .form_wheel_wrapper .wheel_wrapper {
+        min-width: 320px !important;
+        width: 320px !important;
+        justify-content: center;
+        padding-top: 61px;
+    }
+
+    .main_container.mobile {
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .main_container.mobile .form_content_container {
+        justify-content: center;
+        height: auto !important;
+    }
+
+    .main_container.mobile .wheel_wrapper {
+        width: 100%;
+    }
+
+    .mobile .wheel_wrapper {
+        align-items: center;
+    }
+
+    .copy_code_txt_note {
+        position: absolute;
+        left: 50%;
+        bottom: 5px;
+        transform: translateX(-50%);
+    }
+
+    .timer-block {
+        line-height: 24px;
+        min-height: 80px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .step_div::-webkit-scrollbar {
+        width: 5px !important;
+        height: 8px !important;;
+        background-color: #aaa !important;;
+    }
+
+    .step_div::-webkit-scrollbar-thumb {
+        background-color: black !important;;
+    }
+</style>
+
+<link rel="stylesheet" href="./intlTelInput.css">
+<script src="./intlTelInput.min.js.download"></script>
+
+
+<div style="width: 100%;height:100vh;display: flex;align-items: center;justify-content: center;">
+  <div id="form-main" class="form_row form_body form_popup" style="width:600px;box-shadow: 0 0 15px 4px #00000025;border-radius:6px;border-color:;border-style:;border-width:0px;max-width: 100%; margin-left:auto;margin-right:auto;text-rendering: optimizeLegibility;-webkit-font-smoothing: antialiased;-moz-osx-font-smoothing: grayscale;">
+    <div id="form-body-main" class="top_wrapper has_image" style="background-color:#FFFFFF;min-height:200px;border-radius:6px;border-color:;border-style:;border-width:0px;">
+      <div class="popup_header" style="color: #FFFFFF;">
+        <div style="width: 100%; float: right">
+          <div style="margin-top:8px;margin-right:10px;" class="close_icon">
+            <svg role="img" width="24" height="24" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="10" cy="10" r="9.5" fill="#00000066" stroke="#00000000"></circle>
+              <path d="M6 6L14 14M6 14L14 6L6 14Z" stroke="#ffffff" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+          </div>
+        </div>
+      </div>
+      <div class="container main_container mobile">
+
+
+        <div class="form_content_container" style="width: 100%; height: 100%;">
+          <div style="display: flex;flex-direction:column;justify-content:center;min-height:200px;background-color:#FFFFFF;padding-top:0px;padding-bottom:0px;padding-left:0px;padding-right:0px;border-radius:6px;">
+              <div class="form_col element_outer">
+
+                <div class="step_element">
+                  <div style="width: 100%;padding-top: 10px;padding-left:6px;padding-right: 6px;padding-bottom: 10px;">
+                      <div style="width: 100%;text-align: center;;">
+                          <img src="./Voylla_Logo_480_x_120(1).png" style="width: 200px;max-width: 100%;">
+                      </div>
+
+                  </div>
+                </div>
+              </div>
+              <div class="form_col element_outer">
+
+                <div class="step_element">
+                  <div style="width: 100%;padding-top: 0px;padding-left:40px;padding-right: 40px;padding-bottom: 0px;">
+                      <div style="width: 100%;overflow-wrap: break-word;">
+                        <h3 class="ql-align-center"><strong style="color: rgb(68, 68, 68);" class="ql-font-poppins">Extra 10% OFF YOUR FIRST ORDER</strong></h3>
+                      </div>
+
+                  </div>
+                </div>
+              </div>
+              <div class="form_col element_outer">
+
+                <div class="step_element">
+                  <div style="width: 100%;padding-top: 0px;padding-left:40px;padding-right: 40px;padding-bottom: 0px;">
+                      <div style="width: 100%;overflow-wrap: break-word;">
+                        <div class="ql-align-center"><span class="ql-font-comic-sans-ms">Be the first to explore our exclusive new launches!</span></div>
+                      </div>
+
+                  </div>
+                </div>
+              </div>
+              <div class="form_col element_outer">
+
+                <div class="step_element">
+                  <div style="width: 100%;padding-top: 10px;padding-left:40px;padding-right: 40px;padding-bottom: 10px;background-color: #FFFFFF00 ;">
+                      <div style="max-width: 100%;">
+                        <input type="text" style="background-color: #FFFFFF;font-size: 16;border-color:#00000030;border-style:solid;border-width:1px;height: 40px;font-family: Poppins;font-weight: Normal;letter-spacing: 0.0em;color: #000000;border-radius: 6px;" a-is_required="1" a-elementid="814269" name="email" a-validation="EMAIL" class="a_validation step_input_text email_field" placeholder="Enter your email address">
+                        <small id="valid_814269" class="form-text text-muted invalid-feedback" style="color: #D8000C !important;">
+                          Invalid Email. Please enter a valid Email Address.
+                        </small>
+                      </div>
+
+                  </div>
+                </div>
+              </div>
+              <div class="form_col element_outer">
+
+                <div class="step_element">
+                  <div style="width: 100%;padding-top: 10px;padding-left:40px;padding-right: 40px;padding-bottom: 20px;background-color: #FFFFFF00 ;">
+                      <div style="max-width: 100%;">
+                        <div class="iti iti--allow-dropdown iti--separate-dial-code iti--show-flags"><div class="iti__flag-container"><div class="iti__selected-flag" role="combobox" aria-haspopup="listbox" aria-controls="iti-0__country-listbox" aria-expanded="false" aria-label="Telephone country code" tabindex="0" title="India (भारत)"><div class="iti__flag iti__in"></div><div class="iti__selected-dial-code">+91</div><div class="iti__arrow"></div></div></div><input type="tel" a-default_country="IN" a-is_required="0" a-elementid="814267" name="phone_number" a-validation="PHONE" placeholder="Phone number" id="telephone" class="tele_class a_validation step_input_text tele_input phone_field" style="width: 100%; background-color: rgb(255, 255, 255); border-color: rgba(0, 0, 0, 0.19); border-style: solid; border-width: 1px; height: 40px; font-family: Poppins; font-weight: normal; letter-spacing: 0em; color: rgb(0, 0, 0); border-radius: 6px; padding-left: 82px;" autocomplete="off" data-intl-tel-input-id="0"></div>
+                          <div style="margin-top: 5px;color: #E48F76;font-family: Arial;font-size: 12px;font-weight: 400;">
+                            <input checked="" style="margin-top: 5px;" id="whatsappConsent" type="checkbox" a-elementid="814267" name="whatsapp_consent">
+                            Receive important information and updates on
+                            <svg width="15" height="30" style="margin-top: -5px" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <g clip-path="url(#clip0_850_45682)">
+                                <path d="M15.8589 51.3876L16.8397 51.8725C20.9272 54.2963 25.5048 55.4275 30.0826 55.4275C44.4697 55.4275 56.241 43.7926 56.241 29.5722C56.241 22.7852 53.4615 16.1597 48.557 11.3118C43.6522 6.46382 37.1125 3.7168 30.0826 3.7168C15.6955 3.7168 3.92403 15.3517 4.08762 29.7339C4.08762 34.5816 5.55903 39.2681 8.0113 43.3078L8.6652 44.2775L6.04958 53.8117L15.8589 51.3876Z" fill="#00E676"></path>
+                                <path d="M51.3359 8.72618C45.7772 3.07042 38.0932 0 30.2456 0C13.5698 0 0.163594 13.4124 0.326953 29.7336C0.326953 34.9047 1.79836 39.9144 4.25086 44.4389L0 59.7906L15.8585 55.7507C20.2727 58.1747 25.1773 59.3059 30.0823 59.3059C46.5947 59.3059 60.0009 45.8933 60.0009 29.5724C60.0009 21.654 56.8945 14.2205 51.3361 8.72618H51.3359ZM30.2456 54.2965C25.8314 54.2965 21.4172 53.1656 17.6569 50.9032L16.676 50.4183L7.19367 52.8422L9.64594 43.6314L8.99203 42.6616C1.79836 31.1884 5.23172 15.998 17.003 8.88765C28.7742 1.77753 43.9788 5.17112 51.1725 16.806C58.3659 28.4409 54.9326 43.4694 43.1616 50.5798C39.401 53.0036 34.8234 54.2963 30.2456 54.2963V54.2965ZM44.6327 36.3595L42.8344 35.5515C42.8344 35.5515 40.2187 34.4203 38.5837 33.6123C38.4202 33.6123 38.2568 33.4506 38.0932 33.4506C37.6027 33.4506 37.2757 33.6123 36.9487 33.774C36.9487 33.774 36.7854 33.9354 34.4965 36.521C34.3329 36.8442 34.0059 37.0059 33.679 37.0059H33.5154C33.352 37.0059 33.0251 36.8442 32.8615 36.6827L32.044 36.3595C30.2456 35.5515 28.6109 34.5818 27.3028 33.2891C26.9759 32.9659 26.4853 32.6428 26.1584 32.3196C25.0139 31.1884 23.8695 29.8955 23.0522 28.4412L22.8886 28.118C22.7252 27.9563 22.7252 27.7948 22.5616 27.4717C22.5616 27.1485 22.5616 26.8253 22.7252 26.6636C22.7252 26.6636 23.3791 25.8556 23.8695 25.371C24.1966 25.0476 24.36 24.5629 24.687 24.2398C25.0139 23.7549 25.1775 23.1086 25.0139 22.6237C24.8505 21.8157 22.8886 17.4526 22.3983 16.4831C22.0711 15.9982 21.7444 15.8368 21.2538 15.6751H19.4555C19.1283 15.6751 18.8016 15.8368 18.4744 15.8368L18.3108 15.9982C17.9838 16.1599 17.6569 16.4831 17.3299 16.6446C17.003 16.968 16.8394 17.2909 16.5124 17.6143C15.368 19.0686 14.7141 20.8462 14.7141 22.6237C14.7141 23.9164 15.041 25.2093 15.5316 26.3405L15.6952 26.8253C17.1666 29.8955 19.1283 32.6428 21.7444 35.0666L22.3983 35.713C22.8886 36.1978 23.3791 36.521 23.7061 37.0056C27.1395 39.9146 31.0631 42.0153 35.4773 43.1465C35.9679 43.308 36.6218 43.308 37.1123 43.4697H38.7471C39.5646 43.4697 40.5455 43.1465 41.1996 42.8233C41.6899 42.5002 42.0169 42.5002 42.3438 42.177L42.671 41.8536C42.998 41.5304 43.3249 41.369 43.6519 41.0458C43.9788 40.7226 44.3058 40.3995 44.4694 40.0761C44.7963 39.4297 44.9597 38.6217 45.1233 37.8139V36.6827C45.1233 36.6827 44.9597 36.521 44.6327 36.3595V36.3595Z" fill="white"></path>
+                              </g>
+                              <defs>
+                                <clippath id="clip0_850_45682">
+                                  <rect width="60" height="60" fill="white"></rect>
+                                </clippath>
+                              </defs>
+                            </svg>
+                            WhatsApp
+                          </div>
+                        <small id="valid_814267" class="form-text text-muted invalid-feedback" style="color: #D8000C !important;">
+                          Invalid Phone Number. Please enter a valid Phone Number.
+                        </small>
+                      </div>
+
+                  </div>
+                </div>
+              </div>
+              <div class="form_col element_outer">
+
+                <div class="step_element">
+                  <div style="width: 100%;padding-top: 0px;padding-left:40px;padding-right: 40px;padding-bottom: 10px;">
+                          <div style="max-width: 100%;;">
+                            <button a-elementid="814265" class="step_btn" a-action="submit" style="font-family: Poppins;color: #ffffff;font-size:16px;font-weight: 700;border-radius: 3px;background-color: #E48F76;width: 100%;border-width: 1px;height: 40px;border-style: solid;border-color: #E48F76;">SUBSCRIBE NOW</button>
+                          </div>
+
+                  </div>
+                </div>
+              </div>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="./crypto-js.min.js.download"></script>
+<script src="./d3@7"></script>
+
+<script>
+    function handleClick(e) {
+        if (e.button === 2) {
+            e.preventDefault();
+        }
+    }
+
+    document.addEventListener('contextmenu', handleClick);
+</script>
+
+<script>
+    $(function () {
+        const decryptData = (encryptedData) => {
+            const decodedData = CryptoJS.enc.Base64.parse(encryptedData);
+            const key = decodedData.words.slice(0, 8);
+            const iv = decodedData.words.slice(8, 12);
+            const encryptedText = decodedData.words.slice(12);
+
+            const decipher = CryptoJS.AES.decrypt(
+                {ciphertext: CryptoJS.lib.WordArray.create(encryptedText)}, CryptoJS.lib.WordArray.create(key), {
+                    iv: CryptoJS.lib.WordArray.create(iv),
+                    mode: CryptoJS.mode.CBC,
+                    padding: CryptoJS.pad.Pkcs7,
+                }
+            );
+
+            const decryptedData = CryptoJS.enc.Utf8.stringify(decipher).toString();
+            return JSON.parse(decryptedData);
+        };
+
+        let totalSeconds = parseInt('0');
+        totalSeconds += parseInt('0') * 60;
+        totalSeconds += parseInt('0') * 3600;
+        totalSeconds += parseInt('0') * 86400;
+
+        function updateTimer() {
+            if (totalSeconds <= -1) {
+                clearInterval(timerCounter);
+                return;
+            }
+
+            const days = Math.floor(totalSeconds / 86400);
+            const hours = Math.floor((totalSeconds % 86400) / 3600);
+            const minutes = Math.floor((totalSeconds % 3600) / 60);
+            const seconds = totalSeconds % 60;
+
+            $('#contlo-days-block h6').text(days.toString().padStart(2, '0'));
+            $('#contlo-hours-block h6').text(hours.toString().padStart(2, '0'));
+            $('#contlo-minutes-block h6').text(minutes.toString().padStart(2, '0'));
+            $('#contlo-seconds-block h6').text(seconds.toString().padStart(2, '0'));
+
+            window.parent.postMessage({
+                type: "contlo_time_refactor",
+                seconds: seconds.toString().padStart(2, '0'),
+                minutes: minutes.toString().padStart(2, '0'),
+                hours: hours.toString().padStart(2, '0'),
+                days: days.toString().padStart(2, '0'),
+                form_step_id: '313503',
+                cookie_populated: "true"
+            }, '*');
+
+            totalSeconds--;
+        }
+
+        const timerCounter = setInterval(updateTimer, 1000);
+
+
+        // Get all elements with the class "tele_class"
+        let tele_elements = document.getElementsByClassName("tele_class");
+        // Check if there is at least one element with the class "tele_class"
+        if (tele_elements.length > 0) {
+            // Get the default country code from the first tele_class element
+            let country_code = tele_elements[0].getAttribute("a-default_country");
+
+            // Get the first tele_class element
+            const input = tele_elements[0];
+
+            // Check if the input element exists
+            if (input) {
+                // Initialize intlTelInput with configuration
+                window.intlTelInput(input, {
+                    separateDialCode: true,
+                    initialCountry: input.getAttribute("a-default_country") || "US",
+
+                    // Use geoIpLookup to automatically set the country based on user's IP
+                    geoIpLookup: function (callback) {
+                        fetch("https://ipapi.co/json")
+                            .then(function (res) {
+                                // Check if the response is successful (status code 200)
+                                if (res.ok) {
+                                    return res.json();
+                                } else {
+                                    throw new Error("Failed to fetch IP information");
+                                }
+                            })
+                            .then(function (data) {
+                                // Call the callback with the country code or the default if not available
+                                callback(country_code);
+                            })
+                            .catch(function (error) {
+                                // Call the callback with the default country code
+                                callback(country_code);
+                            });
+                    },
+                    // Load the utils script from the specified CDN
+                    nationalMode: true,
+                    formatOnDisplay: false,
+                    utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/utils.js"
+                });
+                function cleanPhoneNumber() {
+                    var phoneNumber = input.value.trim();
+                    phoneNumber = phoneNumber.replace(/[^\d+]/g, '');
+                    input.value = phoneNumber;
+                }
+                input.addEventListener('blur', cleanPhoneNumber);
+            }
+        }
+
+        $("#coupon-element").click(function (event) {
+            let discount_code = 'discount'
+            applyDiscountCode(discount_code)
+            $('#coupon-element small').text('CODE APPLIED!');
+            setTimeout(() => $('#coupon-element small').text('APPLY CODE'), 5000);
+            navigator.clipboard.writeText(discount_code).then(function () {
+                console.log('Async: Copying to clipboard was successful!');
+            }, function (err) {
+                console.error('Async: Could not copy text: ', err);
+            });
+        })
+
+        $("#contlo-discount-element").click(function (event) {
+            event.stopPropagation()
+            let target = document.getElementById("contlo-discount-element")
+            let discount_div = target.getElementsByClassName("contlo-coupon-value")[0]
+            let discount_code = discount_div.textContent || discount_div.innerText
+            applyDiscountCode(discount_code)
+            $('#contlo-discount-element span').text('CODE APPLIED!');
+            setTimeout(() => $('#contlo-discount-element span').text('APPLY CODE'), 5000);
+            navigator.clipboard.writeText(discount_code).then(function () {
+                console.log('Async: Copying to clipboard was successful!');
+            }, function (err) {
+                console.error('Async: Could not copy text: ', err);
+            });
+        })
+
+        resetWidth()
+        var wheel_result = ""
+        var coupon_label = ""
+        var coupon_type = "static"
+        var coupon_code = "discount"
+        let isFormValid = true
+        let has_spinned = false
+
+        const resizeAbandonedBisIframe = () => {
+            let display_timing = 'DELAY'
+            let dynamic_discount = ''
+
+            if (display_timing === "BACK_IN_STOCK") {
+                window.parent.postMessage({
+                    type: "contlo_bis_resize",
+                    display_timing: display_timing
+                }, '*');
+            }
+
+            window.parent.postMessage({
+                type: "contlo_discount_refactor",
+                dynamic_discount: dynamic_discount,
+                form_step_id: '313503',
+                cookie_populated: "true"
+            }, '*');
+
+            setEmbeddedSize();
+        }
+
+        window.onload = () => {
+            resizeAbandonedBisIframe();
+        }
+
+        const setEmbeddedSize = () => {
+            let form_type = 'POPUP'
+            if (form_type === "EMBED") {
+                let form_height = '556'
+                window.parent.postMessage({
+                    type: "contlo_embed_resize",
+                    frameHeight: form_height
+                }, '*');
+            }
+        }
+
+        setTimeout(() => {
+            setEmbeddedSize();
+        }, 300);
+
+        function applyDiscountCode(discount_code) {
+            FormEvent.sendEvent("9d938511977b4539ad71e430f3600230", 'applied_code', "3436", "313503", getChannel())
+            window.parent.postMessage({
+                type: "contlo_apply_discount_code",
+                discount_code: discount_code,
+                form_id: "3436"
+            }, '*')
+        }
+
+        function resetWidth() {
+            $('.tele_class').each(function () {
+                let paddingLeft = $(this).css("paddingLeft");
+                paddingLeft = parseInt(paddingLeft.replace('px', ''))
+                if (paddingLeft < 10) {
+                    setTimeout(() => {
+                        $(this).css("paddingLeft", "82px")
+                    }, 1000)
+
+                } else {
+                    setTimeout(() => {
+                        $(this).css("paddingLeft", paddingLeft + "px")
+                    }, 1000)
+                }
+            })
+        }
+
+        function productClick(target) {
+            let form_type = 'POPUP'
+            let action = target.getAttribute("a-action")
+            if (action === 'product_redirect') {
+                let redirect_url = target.getAttribute("redirect-url")
+
+                let redirect_to = target.getAttribute("redirect-to")
+                if (redirect_to !== null && redirect_to === "cart_page") {
+                    redirect_url = 'https://thelabellife-voylla.myshopify.com/cart?v=1&utm_source=contlo&utm_medium=form&utm_campaign=3436'
+                }
+
+                let message = {
+                    source: 'contlo_form',
+                    type: 'contlo_form_close',
+                    status: 'complete',
+                    form_id: "3436",
+                    form_type: 'POPUP',
+                    display_timing: 'DELAY'
+                };
+
+                if (form_type !== "EMBED") {
+                    window.top.postMessage(message, "*");
+                }
+                FormEvent.sendEvent("9d938511977b4539ad71e430f3600230", 'button_click', "3436", "313503", getChannel())
+                window.open(redirect_url, '_blank')
+            }
+        }
+
+        $(".step_div").click(function (event) {
+            event.stopPropagation();
+            productClick(this, event.currentTarget);
+        })
+
+        $(".step_link").click(function (event) {
+            event.preventDefault();
+            let redirect_url = $(this).attr("href");
+            let message = {
+                type: 'contlo_redirect_same_page',
+                url_type: 'same_url',
+                url: redirect_url,
+                target: '_self',
+                form_id: '3436',
+                form_name: 'FORMdesktop'
+            }
+            window.top.postMessage(message, "*");
+            FormEvent.sendEvent("9d938511977b4539ad71e430f3600230", 'redirect_form', "3436", "313503", getChannel())
+        })
+
+        $(".step_btn").click(function (event) {
+            let target = event.target
+            let action = target.getAttribute("a-action")
+            if (action === 'submit') {
+                submitForm(true)
+            }
+
+            if (action === 'next_step') {
+                $.ajax({
+                    url: '/form_view/goto_next_step',
+                    method: 'post',
+                    headers: {
+                        'X-CSRF-Token': $('meta[name=csrf-token]').attr('content')
+                    },
+                    data: {
+                        public_key: "9d938511977b4539ad71e430f3600230",
+                        external_user_id: "",
+                        form_step_id: "313503",
+                        wheel_result: wheel_result,
+                        coupon_label: coupon_label,
+                        coupon_type: coupon_type,
+                        coupon_code: coupon_code,
+                        device: getChannel()
+                    }
+                }).done(function (response) {
+                    response = decryptData(response.data);
+                    if (response['success']) {
+                        FormEvent.sendNextPageEvent("9d938511977b4539ad71e430f3600230", response['external_id'], response['next_step_url'], 'POPUP', 'DELAY')
+                        return
+                    }
+                })
+            }
+
+            if (action === 'spin' && has_spinned === false) {
+                submitForm(false)
+                if (isFormValid === true) {
+                    has_spinned = true
+                }
+            }
+
+            if (action === 'redirect') {
+                let redirect_buttons = document.getElementsByClassName("step_btn")
+
+                for (let i = 0; i < redirect_buttons.length; i++) {
+                    if (target === redirect_buttons[i]) {
+                        let elementId = redirect_buttons[i].getAttribute("a-elementid")
+                        let idName = "redirect-button_" + elementId
+                        let redirect_button = document.getElementById(idName)
+
+                        if (redirect_button !== null) {
+                            let redirect_url = redirect_button.getAttribute("redirect-url")
+                            let redirect_action = redirect_button.getAttribute("redirect-action")
+                            let message = {
+                                source: 'contlo_form',
+                                type: 'contlo_form_redirect',
+                                status: 'redirect',
+                                form_id: "3436",
+                                form_type: 'POPUP',
+                                display_timing: 'DELAY'
+                            };
+                            window.top.postMessage(message, "*");
+                            FormEvent.sendEvent("9d938511977b4539ad71e430f3600230", 'redirect_form', "3436", "313503", getChannel())
+                            window.open(redirect_url, redirect_action === 'true' ? '_blank' : '_parent')
+                        }
+                    }
+                }
+            }
+
+            if (action === 'submit_redirect') {
+                let redirect_button = document.getElementById("redirect-submit-button")
+                let redirect_url = redirect_button.getAttribute("redirect-url")
+                let redirect_action = redirect_button.getAttribute("redirect-action")
+                let form_type = 'POPUP'
+                submitForm(true)
+                if (isFormValid) {
+                    let message = {
+                        source: 'contlo_form',
+                        type: 'contlo_form_redirect',
+                        status: 'submit_redirect',
+                        form_id: "3436",
+                        form_type: 'POPUP',
+                        display_timing: 'DELAY'
+                    };
+                    if (form_type !== "EMBED") {
+                        window.top.postMessage(message, "*");
+                    }
+
+                    FormEvent.sendEvent("9d938511977b4539ad71e430f3600230", 'submit_step', "3436", "313503", getChannel())
+                    FormEvent.sendEvent("9d938511977b4539ad71e430f3600230", 'redirect_form', "3436", "313503", getChannel())
+                    window.open(redirect_url, redirect_action === 'true' ? '_blank' : '_parent')
+                } else {
+                    isFormValid = true
+                    setEmbeddedSize();
+                }
+            }
+
+            if (action === 'close') {
+                closeMainForm()
+            }
+        })
+
+        $("body").append("<style>" +
+            ".step_input_text::placeholder{color: #00000080}" +
+            ".vti__input{letter-spacing: 0.0 !important; font-weight: Normal !important}" +
+            "::placeholder{color: #00000080}" +
+            "::-ms-input-placeholder{color: #00000080}" +
+            ".step_input_text::-ms-input-placeholder{color: #00000080}" +
+            "::-moz-placeholder{color: #00000080}" +
+            ".step_input_text::-moz-placeholder{color: #00000080}" +
+            ".step_input_text::-webkit-input-placeholder{color: #00000080}" +
+            "::-webkit-input-placeholder{color: #00000080}" +
+            ".input-group-append{height: 40px !important}" +
+            ".form_left{margin-top:" + String(10 -(getFormHeight() / 2)) + "px;}" +
+            ".form_right{margin-top:" + String(10 -(getFormHeight() / 2)) + "px;}" +
+            "</style>")
+
+        function submitForm(from_spin) {
+            const phone_input = document.querySelector('#telephone');
+            let errorElements = document.getElementsByClassName("invalid-feedback")
+            for (let i = 0; i < errorElements.length; i++) {
+                errorElements[i].classList.remove("d-block")
+            }
+
+            let validationElements = document.getElementsByClassName("a_validation")
+            let input_fields = {}
+            let input_element_ids = {}
+
+            if (validationElements.length > 0) {
+                for (let i = 0; i < validationElements.length; i++) {
+                    let validationType = validationElements[i].getAttribute("a-validation")
+                    let elementId = validationElements[i].getAttribute("a-elementid")
+                    let isRequired = validationElements[i].getAttribute("a-is_required")
+                    let propertyName = validationElements[i].getAttribute("name")
+                    let elementDateFormat = validationElements[i].getAttribute("a-dateformat")
+                    if (validationType === 'SINGLE_SELECT') {
+                        const radioButtons = document.querySelectorAll('input[name=' + propertyName + ']');
+                        for (const radioButton of radioButtons) {
+                            if (radioButton.checked) {
+                                input_fields[validationElements[i].name] = radioButton.value;
+                                break;
+                            }
+                        }
+                    } else {
+                        input_fields[validationElements[i].name] = validationElements[i].value
+                    }
+
+                    input_element_ids[validationElements[i].name] = elementId
+                    let errorElementId = "valid_" + elementId
+
+                    if (isRequired === "1" && validationElements[i].value.length <= 0) {
+                        document.getElementById(errorElementId).classList.add('d-block');
+                        if (validationType === 'SINGLE_SELECT' || validationType === 'DROPDOWN') {
+                            $(errorElementId).text("No option selected. Please select a valid option.")
+                        } else {
+                            $(errorElementId).text("This field is mandatory!!")
+                        }
+                        isFormValid = false
+                        setEmbeddedSize();
+                        return
+                    }
+                    if (isRequired === "1" && ((validationType === 'DROPDOWN' && validationElements[i].value === "contlo_null_value") || (validationType === 'SINGLE_SELECT' && $('input[name=' + propertyName + ']:checked').length === 0))) {
+                        document.getElementById(errorElementId).classList.add('d-block');
+                        $(errorElementId).text("No option selected. Please select a valid option.")
+                        isFormValid = false
+                        setEmbeddedSize();
+                        return
+                    }
+                    if (validationType === 'EMAIL' && validationElements[i].value.length > 0) {
+                        let email_regex = "[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$"
+                        if (!validationElements[i].value.match(email_regex)) {
+                            document.getElementById(errorElementId).classList.add('d-block');
+                            $(errorElementId).text("Invalid Email. Please enter a valid Email Address.")
+                            isFormValid = false
+                            setEmbeddedSize();
+                            return
+                        }
+                    } else if (validationType === 'PHONE' && validationElements[i].value.length > 0) {
+                        let phone_regex = /^[+]*[(]{0,1}[0-9]{1,3}[)]{0,1}[-\s\./0-9]*$/g;
+                        if (phone_input) {
+                            let countryData = window.intlTelInputGlobals.getInstance(phone_input).getSelectedCountryData();
+                            if (countryData.dialCode === "+45") {
+                                phone_regex = /^[0-9]{8}$/g;
+                            }
+                            if (!checkPhoneDigits(validationElements[i].value, countryData.dialCode) || !validationElements[i].value.match(phone_regex)) {
+                                document.getElementById(errorElementId).classList.add('d-block');
+                                $(errorElementId).text("Invalid Phone Number. Please enter a valid Phone Number.")
+                                isFormValid = false
+                                setEmbeddedSize();
+                                return
+                            }
+                        }
+                    } else if (validationType === 'DATE' && validationElements[i].value.length > 0) {
+                        if (!isValidDate(validationElements[i].value, elementDateFormat)) {
+                            document.getElementById(errorElementId).classList.add('d-block');
+                            $(errorElementId).text("Invalid Date. Please enter a valid Date.")
+                            isFormValid = false
+                            setEmbeddedSize();
+                            return
+                        }
+                    }
+                }
+            }
+            if (phone_input) {
+                let countryData = window.intlTelInputGlobals.getInstance(phone_input).getSelectedCountryData();
+                input_fields['dial_code'] = countryData.dialCode
+                input_fields['country_iso'] = countryData.iso2
+            }
+            input_fields['geo_country'] = "india"
+            if ($('#whatsappConsent').length) {
+                input_fields['whatsapp_consent'] = $('#whatsappConsent')[0].checked
+            }
+
+            let form_type = 'POPUP'
+            if (form_type === "WHEEL" && !from_spin) {
+                spinWheel();
+                return true;
+            }
+
+            $.ajax({
+                url: '/form_view/form_save',
+                method: 'post',
+                headers: {
+                    'X-CSRF-Token': $('meta[name=csrf-token]').attr('content')
+                },
+                data: {
+                    public_key: "9d938511977b4539ad71e430f3600230",
+                    external_user_id: "",
+                    form_step_id: "313503",
+                    input_fields: input_fields,
+                    input_element_ids: input_element_ids,
+                    wheel_result: wheel_result,
+                    coupon_label: coupon_label,
+                    coupon_type: coupon_type,
+                    coupon_code: coupon_code,
+                    product_id: '',
+                    variant_id: '',
+                    device: getChannel()
+                }
+            }).done(function (response) {
+                response = decryptData(response.data);
+                if (response['success']) {
+                    FormEvent.sendEvent("9d938511977b4539ad71e430f3600230", 'submit_step', "3436", "313503", getChannel())
+                    FormEvent.sendNextPageEvent("9d938511977b4539ad71e430f3600230", response['external_id'], response['next_step_url'], 'POPUP', 'DELAY')
+                    let message = {
+                        source: 'contlo_form',
+                        type: 'contlo_form_cookies',
+                        status: 'complete',
+                        email: input_fields["email"],
+                        phone_number: input_fields["phone_number"]
+                    };
+                    window.top.postMessage(message, "*");
+                    return
+                }
+            })
+        }
+
+        window.addEventListener('load', onPageLoad);
+
+        function closeFormSubmit() {
+            let display_timing = 'DELAY'
+            let form_type = 'POPUP'
+
+            if (form_type !== "EMBED") {
+                if (display_timing !== "ABANDONED_CART" && display_timing !== "VIEWED_PRODUCT" && display_timing !== "BACK_IN_STOCK" && display_timing !== "ON_CLICK_TARGETING") {
+                    closeFormTeaser('destroy_teaser', '313503', "3436")
+                }
+
+                let message = {
+                    source: 'contlo_form',
+                    type: 'contlo_form_close',
+                    status: 'complete',
+                    form_id: "3436",
+                    form_type: 'POPUP',
+                    display_timing: 'DELAY'
+                };
+                window.top.postMessage(message, "*");
+            }
+        }
+
+        function closeMainForm() {
+            FormEvent.sendEvent("9d938511977b4539ad71e430f3600230", 'close_form', "3436", "313503", getChannel())
+            closeForm('cancel', '313503', "3436", 'POPUP', 'DELAY')
+
+        }
+
+        $(".close_icon").click(function () {
+            FormEvent.sendEvent("9d938511977b4539ad71e430f3600230", 'close_form', "3436", "313503", getChannel())
+            closeForm('cancel', '313503', "3436", 'POPUP', 'DELAY')
+
+        })
+
+        window.addEventListener("click", function (e) {
+            if (!document.getElementById('form-body-main').contains(e.target)) {
+                let this_device = 'mobile'
+                let desktop_click = 'true'
+                let mobile_click = 'false'
+                if ((this_device === 'desktop' && desktop_click === 'true') || (this_device !== 'desktop' && mobile_click === 'true')) {
+                    FormEvent.sendEvent("9d938511977b4539ad71e430f3600230", 'close_form', "3436", "313503", getChannel())
+                    closeForm('cancel', '313503', "3436", 'POPUP', 'DELAY')
+
+                }
+            }
+        })
+
+        let date_elements = document.getElementsByClassName("date")
+        if (date_elements.length > 0) {
+            for (let i = 0; i < date_elements.length; i++) {
+                let elementId = date_elements[i].getAttribute("date-element-id")
+                let elementDateFormat = document.getElementById("datetimepicker_" + String(elementId)).getAttribute("a-dateformat")
+                $("#datetimepicker_" + String(elementId)).datetimepicker({
+                    format: elementDateFormat,
+                    icons: {
+                        time: "fa fa-clock-o",
+                        date: "fa fa-calendar",
+                        up: "fa fa-arrow-up",
+                        down: "fa fa-arrow-down",
+                        previous: "fa fa-chevron-left",
+                        next: "fa fa-chevron-right"
+                    }
+                }).find('input:first').on("blur", function () {
+                    let date = parseDate($(this).val());
+
+                    if (!isValidDate(date)) {
+                        date = moment().format('YYYY-MM-DD');
+                    }
+
+                    $(this).val(date);
+                })
+            }
+        }
+
+        let isValidDate = function (value, format) {
+            format = format || false;
+            if (format) {
+                value = parseDate(value);
+            }
+
+            let timestamp = Date.parse(value);
+
+            return isNaN(timestamp) === false;
+        }
+
+        let parseDate = function (value) {
+            let m = value.match(/^(\d{1,2})(\/|-)?(\d{1,2})(\/|-)?(\d{4})$/);
+            if (m) {
+                value = m[5] + '-' + ("00" + m[3]).slice(-2) + '-' + ("00" + m[1]).slice(-2);
+                if (isNaN(Date.parse(value))) {
+                    value = m[5] + '-' + ("00" + m[1]).slice(-2) + '-' + ("00" + m[3]).slice(-2);
+                }
+            }
+
+            return value;
+        }
+
+        let checkPhoneDigits = (phoneNumber, countryCode) => {
+            const validDigits = []
+            if (countryCode === "91") {
+                validDigits.push(10)
+            } else if (countryCode === "45") {
+                validDigits.push(8)
+            } else {
+                validDigits.push(9, 10)
+            }
+            return validDigits.includes(phoneNumber.length)
+        }
+
+        function getFormHeight() {
+            return document.getElementById("form-main").clientHeight;
+        }
+
+        onPageLoad()
+        resizeAbandonedBisIframe()
+        if ('true' === "true") {
+            FormEvent.sendEvent("9d938511977b4539ad71e430f3600230", 'show_form', "3436", "313503", getChannel())
+        }
+
+        if ('POPUP' === "WHEEL") {
+            let padding = {top: 20, right: 40, bottom: 0, left: 0},
+                w = 350 - padding.left - padding.right,
+                h = 350 - padding.top - padding.bottom,
+                r = Math.min(w, h) / 2;
+            margin = 20;
+            rotation = 0,
+                oldrotation = 0,
+                picked = 100000,
+                oldpick = [],
+                color = "#000000";
+            var data = `[{"is_win":true,"label":"20% Discount","coupon":"","color":"#FF5454","value":"10","coupon_type":"static"},{"is_win":true,"label":"Free Shipping","coupon":"","color":"#373F47","value":"10","coupon_type":"static"},{"is_win":true,"label":"20% Discount","coupon":"","color":"#FF5454","value":"10","coupon_type":"static"},{"is_win":true,"label":"Free Shipping","coupon":"","color":"#373F47","value":"10","coupon_type":"static"},{"is_win":true,"label":"20% Discount","coupon":"","color":"#FF5454","value":"10","coupon_type":"static"},{"is_win":true,"label":"Free Shipping","coupon":"","color":"#373F47","value":"10","coupon_type":"static"},{"is_win":true,"label":"20% Discount","coupon":"","color":"#FF5454","value":"10","coupon_type":"static"},{"is_win":true,"label":"Free Shipping","coupon":"","color":"#373F47","value":"10","coupon_type":"static"},{"is_win":true,"label":"20% Discount","coupon":"","color":"#FF5454","value":"10","coupon_type":"static"},{"is_win":true,"label":"Free Shipping","coupon":"","color":"#373F47","value":"10","coupon_type":"static"}]`;
+            let enable_shadow = `true`;
+            let this_device = 'mobile';
+            var vis = null;
+            if (data) {
+                data = JSON.parse(data);
+            }
+
+            function rotateArray(arr, indexToSwap, winningIndex) {
+              const length = arr.length;
+              const result = [];
+              const startIndex = (winningIndex - indexToSwap + length) % length;
+              for (let i = startIndex; i < length + startIndex; i++) {
+                  result.push(arr[i % length]);
+              }
+              return result;
+            }
+
+            function createWheelSVG() {
+              if (localStorage.getItem('winningIndex')) {
+                  let winningIndex = parseInt(localStorage.getItem('winningIndex'));
+                  let formPosition = 'LEFT';
+                  let fromWheelLayout = 'HALF';
+                  let indexToSwapWith;
+                  if (formPosition === "RIGHT" && fromWheelLayout != "FULL") {
+                      indexToSwapWith = (data.length <= 6) ? data.length - 1 : data.length - 2;
+                  } else {
+                      indexToSwapWith = (data.length <= 6) ? 0 : 1;
+                  }
+                  if (indexToSwapWith === 0) {
+                    data = rotateArray(data, 0, winningIndex);
+                  } else if (indexToSwapWith === 1) {
+                    data = rotateArray(data, 1, winningIndex);
+                  } else if (indexToSwapWith === data.length - 1) {
+                    data = rotateArray(data, data.length - 1, winningIndex);
+                  } else if (indexToSwapWith === data.length - 2) {
+                    data = rotateArray(data, data.length - 2, winningIndex);
+                  }
+                  localStorage.removeItem('winningIndex');
+              }
+                var svg = d3
+                    .select("#wheel")
+                    .append("svg")
+                    .data([data])
+                    .attr("height", "100%")
+                    .attr("width", "100%")
+                    .attr(
+                        "viewBox",
+                        `0 0 ${w + margin * 2} ${h
+                        }`
+                    );
+                svg
+                    .append("g")
+                    .attr(
+                        "transform",
+                        `translate(${(w + (margin + 2) * 2) / 2}, ${(r + 2)
+                        })`
+                    )
+                    .append("circle")
+                    .attr("r", r)
+                    .attr("filter", "url(#dropshadow)");
+                var container = svg
+                    .append("g")
+                    .attr(
+                        "class",
+                        enable_shadow === "true" ? (('HALF' === "FULL" || 'LEFT' === "LEFT") ? "chartholder" : "chartholder_right") : "holder"
+                    )
+                    .attr(
+                        "transform",
+                        `translate(${(w + margin * 2) / 2}, ${r + 2
+                        })`
+                    );
+                vis = container.append("g");
+                var pie = d3
+                    .pie()
+                    .sort(null)
+                    .value(function (d) {
+                        return 1;
+                    });
+
+                var arc = d3.arc().outerRadius(r).innerRadius(0);
+
+                var arcBorder = d3
+                    .arc()
+                    .innerRadius(r)
+                    .outerRadius(r + 5);
+
+                var arcs = vis
+                    .selectAll("g.slice")
+                    .data(pie)
+                    .enter()
+                    .append("g")
+                    .attr("class", "slice");
+
+                arcs
+                    .append("path")
+                    .attr("fill", function (d, i) {
+                        return d.data.color;
+                    })
+                    .attr("d", function (d) {
+                        return arc(d);
+                    });
+
+                arcs
+                    .append("path")
+                    .attr("fill", "#373F47")  //edge color
+                    .attr("d", arcBorder);
+
+                arcs
+                    .append("text")
+                    .attr("transform", (d) => {
+                        d.innerRadius = 0;
+                        d.outerRadius = r;
+                        d.angle = (d.startAngle + d.endAngle) / 2;
+                        if (this_device !== "mobile" && 'HALF' === "HALF" && 'LEFT' === "RIGHT") {
+                            return (
+                                "rotate(" +
+                                ((d.angle * 180) / Math.PI - 90 + 180) +
+                                ")translate(" +
+                                -40 +
+                                ")"
+                            );
+                        } else {
+                            return (
+                                "rotate(" +
+                                ((d.angle * 180) / Math.PI - 90) +
+                                ")translate(" +
+                                (d.outerRadius - 10) +
+                                ")"
+                            );
+                        }
+                    })
+                    .attr("dx", (d) => {
+                        if (this_device !== "mobile" && 'LEFT' === "RIGHT") {
+                            return -20;
+                        } else {
+                            return -10;
+                        }
+                    })
+                    .attr("dy", (d) => {
+                        return d.endAngle > (90 * Math.PI) / 180 ? 0 : 3;
+                    })
+                    .attr("text-anchor", "end")
+                    .text(function (d, i) {
+                      return d.data.label;
+                    })
+                    .attr("fill", "#FFFFFF") // text color will be added here
+                    .attr(
+                        "style",
+                        `font-family:Arial;font-weight:Bold;font-size: 10px`
+                    );
+
+                container
+                    .append("circle")
+                    .attr("cx", 0)
+                    .attr("cy", 0)
+                    .attr("r", 22)
+                    .attr(
+                        "class",
+                        "center_circle"
+                    )
+                    .attr("fill", "#373F47"); //edges color
+                container
+                    .append("circle")
+                    .attr("cx", 0)
+                    .attr("cy", 0)
+                    .attr("r", 24)
+                    .attr("fill", "transparent")
+                    .attr("stroke-width", 6)
+                    .attr(
+                        "stroke",
+                        "url(#spinner-gradient)"
+                    )
+                    .attr(
+                        "style",
+                        "transform:rotate(45deg)"
+                    );
+
+                const pathArrow =
+                    "M2.68637 25.482L13.8021 4.05328C16.0708 -0.320146 22.104 -0.878916 25.1373 3.00347L29.9286 9.13603C32.9618 13.0184 30.9601 18.7373 26.1677 19.8805L2.68637 25.482Z";
+
+                const defs = svg
+                    .append("path")
+                    .attr("d", pathArrow)
+                    .attr("fill", "#FFC342")
+                    .attr("class", "spin_arrow");
+            }
+
+            createWheelSVG();
+
+            var arrayShuffle = function (array) {
+                for (var i = 0, length = array.length, swap = 0, temp = ''; i < length; i++) {
+                    swap = Math.floor(Math.random() * (i + 1));
+                    temp = array[swap];
+                    array[swap] = array[i];
+                    array[i] = temp;
+                }
+                return array;
+            };
+
+            var percentageChance = function (values, chances) {
+                for (var i = 0, pool = []; i < chances.length; i++) {
+                    if (parseInt(chances[i]) > 0) {
+                        for (var i2 = 0; i2 < parseInt(chances[i]); i2++) {
+                            pool.push(i);
+                        }
+                    }
+                }
+                return values[arrayShuffle(pool)[0]];
+            };
+
+            function clearWheel(index) {
+                d3.select("#wheel").select("svg").remove();
+                reverseOrder(index);
+                setTimeout(() => {
+                    createWheelSVG();
+                    spinWheel(index);
+                    localStorage.setItem('winningIndex', index);
+                }, 1)
+                return true
+            }
+
+            function spinWheel(winIndex) {
+                let wheelResult = winIndex === undefined ? percentageChance(data.map(i => i.label), data.map(i => i.value)) : winIndex
+                var ps = 360 / data.length,
+                    pieslice = Math.round(1440 / data.length),
+                    rng = Math.floor((Math.random() * 1440) + 360);
+
+                let foundIndex = winIndex === undefined ? data.findIndex(x => x.label === wheelResult) : winIndex;
+                if (winIndex === undefined && foundIndex > 0) {
+                    clearWheel(foundIndex);
+                    return true;
+                }else{
+                  localStorage.setItem('winningIndex', foundIndex);
+                }
+
+                vis
+                    .transition()
+                    .duration(5000)
+                    .attrTween("transform", rotTween)
+                    .on("end", (p, j) => {
+                        wheel_result = String(data[0]["is_win"])
+                        coupon_type = String(data[0]["coupon_type"])
+                        coupon_code = String(data[0]["coupon"])
+                        coupon_label = String(data[0]["label"])
+                        submitForm(true);
+                        oldrotation = rotation;
+                    });
+            }
+
+            function reverseOrder(index) {
+                let a = [...data];
+                let b = [...a.splice(index, a.length - index), ...a.slice(0, index)];
+                data = b;
+            }
+
+            function rotTween(to) {
+                let rot = 1440 + 20;
+                if (this_device === "desktop" && 'HALF' === "HALF" && 'LEFT' === "RIGHT") {
+                    rot = 1440 - 60;
+                }
+                var i = d3.interpolate(oldrotation % 360, rot);
+                return function (t) {
+                    return "rotate(" + (i(t)) + ")";
+                };
+            }
+        }
+    });
+</script>
+
+<style>
+  
+    .ql-direction-rtl {
+        direction: rtl;
+        text-align: inherit;
+    }
+
+    .ql-align-center {
+        text-align: center;
+    }
+    .ql-align-justify {
+        text-align: justify;
+    }
+
+    .ql-align-right {
+        text-align: right;
+    }
+    .ql-font-arial {font-family: 'Arial';}
+    .ql-font-alegreya {font-family: 'Alegreya';}
+    .ql-font-austin-cyr {font-family: 'Austin Cyr';}
+    .ql-font-barlow {font-family: 'Barlow', sans-serif;}
+    .ql-font-baskerville {font-family: 'Baskerville', sans-serif;}
+    .ql-font-bradley-hand {font-family: 'Bradley Hand', sans-serif;}
+    .ql-font-brush-script-mt {font-family: 'Brush Script MT', sans-serif;}
+    .ql-font-comic-sans-ms {font-family: 'Comic Sans MS', sans-serif;}
+    .ql-font-copperplate {font-family: 'Copperplate', sans-serif;}
+    .ql-font-didot {font-family: 'Didot', sans-serif;}
+    .ql-font-futura {font-family: 'Futura', sans-serif;}
+    .ql-font-futura-cyrillic {font-family: 'Futura Cyrillic';}
+    .ql-font-gill-sans {font-family: 'Gill Sans', sans-serif;}
+    .ql-font-impact {font-family: 'Impact', sans-serif;}
+    .ql-font-inter{ font-family: 'Inter', sans-serif; }
+    .ql-font-lucida-console {font-family: 'Lucida Console', sans-serif;}
+    .ql-font-lato {font-family: 'Lato', sans-serif;}
+    .ql-font-lora {font-family: 'Lora'}
+    .ql-font-luminari {font-family: 'Luminari', sans-serif;}
+    .ql-font-monaco {font-family: 'Monaco', sans-serif;}
+    .ql-font-optima {font-family: 'Optima', sans-serif;}
+    .ql-font-open-sans {font-family: 'Open Sans'}
+    .ql-font-outfit {font-family: 'Outfit';}
+    .ql-font-palatino {font-family: 'Palatino', sans-serif;}
+    .ql-font-paralucent {font-family: 'Paralucent';}
+    .ql-font-qualion {font-family: 'Qualion';}
+    .ql-font-questa-grande {font-family: 'Questa Grande';}
+    .ql-font-tahoma {font-family: 'Tahoma', sans-serif;}
+    .ql-font-trebuchet-ms {font-family: 'Trebuchet MS', sans-serif;}
+    .ql-font-arial-black {font-family: 'Arial Black', sans-serif;}
+    .ql-font-andale-mono {font-family: 'Andale Mono', sans-serif;}
+    .ql-font-american-typewriter {font-family: 'American Typewriter', sans-serif;}
+    .ql-font-courier { font-family: 'Courier New', serif;}
+    .ql-font-georgia {  font-family: 'Georgia', sans-serif;}
+    .ql-font-helvetica {  font-family: "Helvetica", Arial, sans-serif;}
+    .ql-font-helvetica-neue {  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;}
+    .ql-font-hv-fitzgerald {font-family: 'HV Fitzgerald';}
+
+    .ql-font-kanit{  font-family: "Kanit", "Helvetica Neue", Helvetica, Arial, sans-serif;}
+
+    .ql-font-montserrat {font-family: 'Montserrat';}
+    .ql-font-museo-sans {font-family: 'Museo Sans', sans-serif;}
+    .ql-font-open{  font-family: 'Open Sans', sans-serif;}
+    .ql-font-poppins {font-family: "Poppins", "Helvetica Neue", Helvetica, Arial, sans-serif;;}
+    .ql-font-roboto {font-family: 'Roboto', sans-serif;}
+    .ql-font-rubik {font-family: 'Rubik', sans-serif;}
+    .ql-font-public-sans {font-family: 'Public Sans', sans-serif;}
+    .ql-font-nanum-myeongjo {font-family: 'Nanum Myeongjo', sans-serif;}
+    .ql-font-sofia {font-family: 'Sofia Pro';}
+    .ql-font-times-new-roman {font-family: 'Times New Roman';}
+    .ql-font-verdana {  font-family: 'Verdana', sans-serif;}
+
+
+</style>
+
+
+<style>.step_input_text::placeholder{color: #00000080}.vti__input{letter-spacing: 0.0 !important; font-weight: Normal !important}::placeholder{color: #00000080}::-ms-input-placeholder{color: #00000080}.step_input_text::-ms-input-placeholder{color: #00000080}::-moz-placeholder{color: #00000080}.step_input_text::-moz-placeholder{color: #00000080}.step_input_text::-webkit-input-placeholder{color: #00000080}::-webkit-input-placeholder{color: #00000080}.input-group-append{height: 40px !important}.form_left{margin-top:10px;}.form_right{margin-top:10px;}</style><span id="PING_IFRAME_FORM_DETECTION" style="display: none;"></span><script class="iti-load-utils" async="" src="./utils.js.download"></script></body></html>

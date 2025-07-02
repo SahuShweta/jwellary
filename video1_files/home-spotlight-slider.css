@@ -1,0 +1,18 @@
+.home-spotlight-slider .spotlight-style-4{
+  gap: 10px;
+}
+
+@media screen and (min-width: 769px){
+  .home-spotlight-slider .spotlight-style-4{
+    flex-wrap: nowrap;
+    overflow: auto;
+    justify-content: flex-start;
+    padding-top: 20px;
+  }
+}
+
+@media (min-width: 992px){
+  .home-spotlight-block .col-lg-2{
+    max-width: 11.5%;
+  }
+}

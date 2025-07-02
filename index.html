@@ -7,11 +7,13 @@
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
       rel="stylesheet"
+      integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr"
       crossorigin="anonymous"
     />
 
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="css/font-awesome.css" />
+    <link rel="stylesheet" href="aos.css">
   </head>
   <body>
     <header class="toparea">
@@ -23,16 +25,16 @@
         </div>
       </div>
     </header>
-    <section class="logoarea">
+    <secction>
       <div class="container">
         <div class="row">
-          <div class="col-3">
-            <img src="logo.png" alt="" />
+          <div class="col-md-2 col-12">
+            <img src="logo.png" alt="" class="img-fluid" />
           </div>
-          <div class="col-9">
+          <div class="col-md-10 col-12 jmenu">
             <nav class="navbar navbar-expand-lg bg-body-tertiary">
               <div class="container-fluid">
-                <a class="navbar-brand" href="#">Navbar</a>
+                <a class="navbar-brand" href="#"></a>
                 <button
                   class="navbar-toggler"
                   type="button"
@@ -51,11 +53,11 @@
                   <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
                       <a class="nav-link active" aria-current="page" href="#"
-                        >Home</a
+                        ><b>Home</b></a
                       >
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" href="#">About</a>
+                      <a class="nav-link" href="precious.html">Precious</a>
                     </li>
                     <li class="nav-item">
                       <a class="nav-link" href="#">Fringes</a>
@@ -67,7 +69,7 @@
                       <a class="nav-link" href="#">Men</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" href="#">Collections</a>
+                      <a class="nav-link" href="#">Collections</b></a>
                     </li>
                     <li class="nav-item dropdown">
                       <a
@@ -75,9 +77,8 @@
                         href="#"
                         role="button"
                         data-bs-toggle="dropdown"
-                        aria-expanded="false"
-                      >
-                        Dropdown
+                        aria-expanded="false">
+                        
                       </a>
                       <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="#">Action</a></li>
@@ -87,14 +88,13 @@
                         <li><hr class="dropdown-divider" /></li>
                         <li>
                           <a class="dropdown-item" href="#"
-                            >Something else here</a
-                          >
+                            >Something else here</a>
                         </li>
                       </ul>
                     </li>
                     <li class="nav-item">
                       <a class="nav-link disabled" aria-disabled="true"
-                        >Disabled</a
+                        ></a
                       >
                     </li>
                   </ul>
@@ -115,31 +115,143 @@
           </div>
         </div>
       </div>
-    </section>
-    <section class="catagory">
+    </secction>
+    <!-- <section class="logoarea">
       <div class="container">
         <div class="row">
-          <div class="col-2">
-            <img src="earring.jpeg" alt="" class="box" />
+          <div class="col-md-3 col-12">
+            <img src="logo.png" alt="" class="img-fluid" />
           </div>
-          <div class="col-2">
-            <img src="sets.webp" alt="" class="box" />
-          </div>
-          <div class="col-2">
-            <img src="ring.webp" alt="" class="box" />
-          </div>
-          <div class="col-2">
-            <img src="necklace.webp" alt="" class="box" />
-          </div>
-          <div class="col-2">
-            <img src="bangle.webp" alt="" class="box" />
-          </div>
-          <div class="col-2">
-            <img src="hair.jpeg" alt="" class="box" />
+          <div class="col-md-9 col-12">
+            <nav class="navbar navbar-expand-lg bg-body-tertiary">
+              <div class="container-fluid">
+                <a class="navbar-brand" href="#"></a>
+                <button
+                  class="navbar-toggler"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#navbarSupportedContent"
+                  aria-controls="navbarSupportedContent"
+                  aria-expanded="false"
+                  aria-label="Toggle navigation"
+                >
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+                <div
+                  class="collapse navbar-collapse"
+                  id="navbarSupportedContent"
+                >
+                  <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                      <a class="nav-link active" aria-current="page" href="#"
+                        ><b>Home</b></a
+                      >
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="precious.html">Precious</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="#">Fringes</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="#">Women</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="#">Men</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="#">Collections</b></a>
+                    </li>
+                    <li class="nav-item dropdown">
+                      <a
+                        class="nav-link dropdown-toggle"
+                        href="#"
+                        role="button"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        
+                      </a>
+                      <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Action</a></li>
+                        <li>
+                          <a class="dropdown-item" href="#">Another action</a>
+                        </li>
+                        <li><hr class="dropdown-divider" /></li>
+                        <li>
+                          <a class="dropdown-item" href="#"
+                            >Something else here</a>
+                        </li>
+                      </ul>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link disabled" aria-disabled="true"
+                        ></a
+                      >
+                    </li>
+                  </ul>
+                  <form class="d-flex" role="search">
+                    <input
+                      class="form-control me-2"
+                      type="search"
+                      placeholder="Search"
+                      aria-label="Search"
+                    />
+                    <button class="btn btn-outline-success" type="submit">
+                      Search
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </nav>
           </div>
         </div>
       </div>
+    </section> -->
+    <section>
+      <div class="container">
+        <div class="row">
+          <div class="categoryarea">
+          <div class="col">
+            <img src="earring.jpeg" alt="" class="box">
+            <h3>Earrings</h3>
+            </div>
+            
+          
+          <div class="col">
+            <img src="sets.webp" alt="" class="box">
+            <h3>Sets</h3>
+            </div>
+
+          
+          <div class="col">
+            <img src="ring.webp" alt="" class="box">
+            <h3>Rings</h3>
+            </div>
+    
+          
+          <div class="col">
+            <img src="hair.jpeg" alt="" class="box">
+            <h3>Accesories</h3>
+            </div>
+              
+          
+          <div class="col">
+            <img src="necklace.webp" alt="" class="box">
+            <h3>Necklace</h3>
+            </div>
+          
+          
+          <div class="col">
+            <img src="bangle2.jpg" alt="" class="box">
+            <h3>Bangles</h3>
+            </div>
+      
+          
+        </div>
+      </div>
+      </div>
     </section>
+          
     <section>
       <div class="container">
         <div class="row">
@@ -171,30 +283,27 @@
                 <div class="carousel-item active">
                   <img src="slide2.webp" class="d-block w-100" alt="..." />
                   <div class="carousel-caption d-none d-md-block">
-                    <h5>First slide label</h5>
+                    <h5></h5>
                     <p>
-                      Some representative placeholder content for the first
-                      slide.
+                      
                     </p>
                   </div>
                 </div>
                 <div class="carousel-item">
                   <img src="slide.webp" class="d-block w-100" alt="..." />
                   <div class="carousel-caption d-none d-md-block">
-                    <h5>Second slide label</h5>
+                    <h5></h5>
                     <p>
-                      Some representative placeholder content for the second
-                      slide.
+                      
                     </p>
                   </div>
                 </div>
                 <div class="carousel-item">
                   <img src="slide3.webp" class="d-block w-100" alt="..." />
                   <div class="carousel-caption d-none d-md-block">
-                    <h5>Third slide label</h5>
+                    <h5></h5>
                     <p>
-                      Some representative placeholder content for the third
-                      slide.
+                      
                     </p>
                   </div>
                 </div>
@@ -229,122 +338,442 @@
       </div>
     </section>
     <section>
+      <div class="lable">
+        <div class="row">
+          <div class="col">
+           
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="launch">
       <div class="container">
         <div class="row">
-          <div class="col"></div>
+          <div class="col">
+            <hr>
+          </div>
+          <div class="col">
+            <h1>NEW LAUNCH</h1>
+          </div>
+          <div class="col">
+            <hr>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section">
+      <div class="container">
+        <div class="row">
+          <div class="col-4">
+            <img src="p1.webp" alt="" class="box" data-aos="flip-right">
+          </div>
+          <div class="col-4">
+            <img src="p2.webp" alt="" class="box" data-aos="flip-right">
+          </div>
+          <div class="col-4">
+            <img src="p3.webp" alt="" class="box" data-aos="flip-right">
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="launch">
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <hr>
+          </div>
+          <div class="col">
+            <h2>NEW SEASON, BOHO BREEZE</h2>
+            </div>
+            <div class="col">
+              <hr>
+            </div>
+            
+          </div>
         </div>
       </div>
     </section>
     <section>
+      <div class="season">
+        <div class="row">
+          <div class="col">
+            <div class="default-image1"></div>
+            <p>Fringes bloom in fringe statement choker set</p>
+            <div class="row">
+              <div class="col">
+                <s>₹₹2249</s>
+              </div>
+              <div class="col"><h5>₹1339</h5></div>
+              <div class="row">
+              <div class="click"><button>Add to cart</button></div>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="default-image2"></div>
+            <p>Fringes stay connected statement Ring</p>
+            <div class="row">
+              <div class="col">
+                <s>₹849</s>
+              </div>
+              <div class="col"><h5>₹509</h5></div>
+              <div class="row">
+              <div class="click"><button>Add to cart</button></div>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="default-image3"></div>
+            <p>Fringes weaved fringes choker set</p>
+            <div class="row">
+              <div class="col">
+                <s>₹1529</s>
+              </div>
+              <div class="col"><h5>₹949</h5></div>
+              <div class="row">
+              <div class="click"><button>Add to cart</button></div>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="default-image4"></div>
+            <p>Fringes dangling ring</p>
+            <div class="row">
+              <div class="col">
+                <s>₹749</s>
+              </div>
+              <div class="col"><h5>₹449</h5></div>
+              <div class="row">
+              <div class="click"><button>Add to cart</button></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="launch">
       <div class="container">
         <div class="row">
-          <div class="col"></div>
-          <div class="col"></div>
-          <div class="col"></div>
+          <div class="col">
+            <hr>
+          </div>
+          <div class="col">
+            <h1>BEST SELLERS</h1>
+          </div>
+          <div class="col">
+            <hr>
+          </div>
         </div>
       </div>
     </section>
     <section>
+      <div class="best">
+        <div class="row">
+          <div class="col">
+            <div class="product-image1"></div>
+            <p>Ahambrahasmi moksh rudraksh beeds earrings</p>
+            <div>
+              <div class="row">
+                <div class="col">
+                  <s>₹699</s>
+                </div>
+                <div class="col"><h5>₹399</h5></div>
+                <div class="row">
+                <div class="click"><button>Add to cart</button></div>
+                </div>
+            </div>
+            </div>
+            
+            
+          </div>
+          <div class="col">
+            <div class="product-image2"></div>
+            <p>Ahambrahasmi moksh shakti trishule earrings</p>
+            <div>
+              <div class="row">
+                <div class="col">
+                  <s>₹849</s>
+                </div>
+                <div class="col"><h5>₹399</h5></div>
+                <div class="row">
+                <div class="click"><button>Add to cart</button></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="product-image3"></div>
+            <p>Bagh-E-Fiza colourful enamel emblished earrings</p>
+            <div>
+              <div class="row">
+                <div class="col">
+                  <s>₹1199</s>
+                </div>
+                <div class="col"><h5>₹589</h5></div>
+                <div class="row">
+                <div class="click"><button>Add to cart</button></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="product-image4"></div>
+            <p>Bagh-E-Fiza green beeds earrings</p>
+            <div>
+              <div class="row">
+                <div class="col">
+                  <s>₹949</s>
+                </div>
+                <div class="col"><h5>₹399</h5></div>
+                <div class="row">
+                <div class="click"><button>Add to cart</button></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="giftarea">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col">
+           <div class="garea"> 
+            <img src="gift1.webp" alt="" class="box" class="image1">
+            </div>
+            <div class="parea">
+              <h1>Gift for her</h1>
+            <p>For the woman who deserves all the sparkle in the world!</p>
+            <button>Gift Now</button>
+            </div>
+          </div>
+          <div class="col">
+            <div class="parea">
+              <h1>Gift for him</h1>
+            <p>The Perfect Gift for the Perfect Man!</p>
+            <button>Gift Now</button>
+            </div>
+            <div class="garea">
+            <img src="gift2.webp" alt="" class="box" class="image2">
+          </div>
+          
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="launch">
       <div class="container">
         <div class="row">
-          <div class="col"></div>
+          <div class="col">
+            <hr>
+          </div>
+          <div class="col">
+            <h1>TRENDING LOOKS</h1>
+          </div>
+          <div class="col">
+            <hr>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-2 col-6">
+            <div class="box">
+              <video width="100%" autoplay muted loop>
+                <source src="video1.mp4" type="video/mp4">
+              </video>
+            </div>
+          </div>
+          <div class="col-md-2 col-6">
+            <div class="box">
+              <video width="100%" autoplay muted loop>
+                <source src="video2.mp4" type="video/mp4">
+              </video>
+            </div>
+          </div>
+          <div class="col-md-2 col-6">
+            <div class="box">
+              <video width="100%" autoplay muted loop>
+                <source src="video3.mp4" type="video/mp4">
+              </video>
+            </div>
+          </div>
+          <div class="col-md-2 col-6">
+            <div class="box">
+              <video width="100%" autoplay muted loop>
+                <source src="video4.mp4" type="video/mp4">
+              </video>
+            </div>
+          </div>
+          <div class="col-md-2 col-6">
+            <div class="box">
+              <video width="100%" autoplay muted loop>
+                <source src="video5.mp4" type="video/mp4">
+              </video>
+            </div>
+          </div>
+          <div class="col-md-2 col-6">
+            <div class="box">
+              <video width="100%" autoplay muted loop>
+                <source src="video6.mp4" type="video/mp4">
+              </video>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    
+    <section class="launch">
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <hr>
+          </div>
+          <div class="col">
+            <h1>COSTOMER REVIEWS</h1>
+          </div>
+          <div class="col">
+            <hr>
+          </div>
         </div>
       </div>
     </section>
     <section>
-      <div class="container">
+      <div class="reviews">
         <div class="row">
-          <div class="col"></div>
-          <div class="col"></div>
-          <div class="col"></div>
-          <div class="col"></div>
+          <div class="col-3">
+            <img src="customer1.webp" alt="">
+            <h5>In love...!!</h5>
+            <p>Quality is good...Well finished jewellery.in love with this earrings.</p>
+            <i class="fa fa-star" aria-hidden="true"></i>
+            <i class="fa fa-star" aria-hidden="true"></i>
+            <i class="fa fa-star" aria-hidden="true"></i>
+            <i class="fa fa-star" aria-hidden="true"></i>
+            <i class="fa fa-star" aria-hidden="true"></i>
+            <h5>Kumkum</h5>
+          </div>
+          <div class="col-3">
+            <img src="customer2.webp" alt="">
+            <h5>Very good quality..!</h5>
+            <p>Love the quality of products. All the product of bagh & Fiza collection bright and beautiful</p>
+            <i class="fa fa-star" aria-hidden="true"></i>
+            <i class="fa fa-star" aria-hidden="true"></i>
+            <i class="fa fa-star" aria-hidden="true"></i>
+            <i class="fa fa-star" aria-hidden="true"></i>
+            <i class="fa fa-star" aria-hidden="true"></i>
+            <h5>Srilina Basu Dutta</h5>
+          </div>
+          <div class="col-3">
+            <img src="customer3.webp" alt="">
+            <h5>Awesome...</h5>
+            <p>Beautiful necklace love it!!!!</p>
+            <i class="fa fa-star" aria-hidden="true"></i>
+            <i class="fa fa-star" aria-hidden="true"></i>
+            <i class="fa fa-star" aria-hidden="true"></i>
+            <i class="fa fa-star" aria-hidden="true"></i>
+            <i class="fa fa-star-half-o" aria-hidden="true"></i>
+
+            <h5>Deepa Paul</h5>
+          </div>
+          <div class="col-3">
+            <img src="customer4.webp" alt="">
+            <h5>Woww...!!</h5>
+            <p>Woww.. fully satisfied with this earrings loved it looks exactly same as shown in image and the main point is that very light weight andpackaging is also very good.</p>
+            <i class="fa fa-star" aria-hidden="true"></i>
+            <i class="fa fa-star" aria-hidden="true"></i>
+            <i class="fa fa-star" aria-hidden="true"></i>
+            <i class="fa fa-star" aria-hidden="true"></i>
+            <i class="fa fa-star" aria-hidden="true"></i>
+            <h5>Sheshadri</h5>
+          </div>
+          
         </div>
       </div>
     </section>
-    <section>
+    <footer class="footerarea">
       <div class="container">
         <div class="row">
-          <div class="col"></div>
-        </div>
-      </div>
-    </section>
-    <section>
-      <div class="container">
-        <div class="row">
-          <div class="col"></div>
-          <div class="col"></div>
-          <div class="col"></div>
-          <div class="col"></div>
-          <div class="col"></div>
-          <div class="col"></div>
-        </div>
-      </div>
-    </section>
-    <section>
-      <div class="container">
-        <div class="row">
-          <div class="col"></div>
-        </div>
-      </div>
-    </section>
-    <section>
-      <div class="container">
-        <div class="row">
-          <div class="col"></div>
-          <div class="col"></div>
-          <div class="col"></div>
-          <div class="col"></div>
-        </div>
-      </div>
-    </section>
-    <section>
-      <div class="container">
-        <div class="row">
-          <div class="col"></div>
-        </div>
-      </div>
-    </section>
-    <section>
-      <div class="container">
-        <div class="row">
-          <div class="col"></div>
-          <div class="col"></div>
-          <div class="col"></div>
-          <div class="col"></div>
-        </div>
-      </div>
-    </section>
-    <section>
-      <div class="container">
-        <div class="row">
-          <div class="col"></div>
-        </div>
-      </div>
-    </section>
-    <section>
-      <div class="container">
-        <div class="row">
-          <div class="col"></div>
-          <div class="col"></div>
-          <div class="col"></div>
-          <div class="col"></div>
-          <div class="col"></div>
-          <div class="col"></div>
-        </div>
-      </div>
-    </section>
-    <footer>
-      <div class="container">
-        <div class="row">
-          <div class="col"></div>
+          <div class="col">
+              <h2>Newsletter</h2>
+             <p> Sign up for new arrivals, offers, and more! </p>
+             <input type="email" placeholder="enter your email address">
+             <button>SUBSCRIBE</button>
+
+
+          </div>
         </div>
         <div class="row">
-          <div class="col"></div>
-          <div class="col"></div>
-          <div class="col"></div>
+          <div class="col">
+            <h4>Associate With Us</h4>
+            <ul>
+              <li>Career</li>
+              <li>Francheese</li>
+              <li>Request a return</li>
+              <li>FAQ'S</li>
+              <li>Contact Us</li>
+              <li>Blog</li>
+              <li>About</li>
+              <li>Our Stores</li>
+              <li>Core Values</li>
+                </ul>
+          </div>
+          <div class="col">
+            <h4>Policy Matters</h4>
+            <ul>
+              <li>Terms of use</li>
+              <li>Privacy Policy</li>
+              <li>Shipping Policy</li>
+              <li>International Shipping Policy</li>
+              <li>Return Policy</li>
+              <li>Return & Exchange</li>
+              <li>Grievance</li>
+            </ul>
+          </div>
+          <div class="col">
+                <p><i class="fa fa-whatsapp" aria-hidden="true"></i>    +91 72300 66751</p>
+                <p><i class="fa fa-envelope" aria-hidden="true"></i>    help@Kohinoore.com</p>
+                <p>J 449/450, Adityapur Industrial Area
+                  Sitapura Near Chatrala Circle
+                  Jamshedpur, Jharkhand-302022
+                  India</p>
+          
+          <div class="row">
+            <div class="column1">
+              <a href="#" class="icon">
+                <i class="fa fa-facebook" aria-hidden="true"></i>
+
+              </a>
+            </div>
+            <div class="column2">
+              <a href="#" class="icon">
+                <i class="fa fa-twitter" aria-hidden="true"></i>
+
+              </a>
+            </div>
+            <div class="column3">
+              <a href="#" class="icon">
+                <i class="fa fa-instagram" aria-hidden="true"></i>
+
+              </a>
+            </div>
+            <div class="column4">
+              <a href="#" class="icon">
+                <i class="fa fa-pinterest" aria-hidden="true"></i>
+
+              </a>
+            </div>
+            <div class="column5">
+              <a href="#" class="icon">
+                <i class="fa fa-youtube-play" aria-hidden="true"></i>
+
+              </a>
+            </div>
+          </div>
+          </div>
         </div>
       </div>
     </footer>
+        
+
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
@@ -353,8 +782,17 @@
     <script>const myCarouselElement = document.querySelector('#carouselExampleFade')
 
 const carousel = new bootstrap.Carousel(myCarouselElement, {
-  interval: 200
+  interval: 1000
 
 })</script>
+
+<script src="aos.js"></script>
+<script>
+			AOS.init({
+				easing: 'ease-out-back',
+				duration: 1000
+			});
+		</script>
+
   </body>
 </html>

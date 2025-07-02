@@ -1,0 +1,553 @@
+let ip = '';
+let isProcessed = false;
+let _fbp = getCookie("_fbp");
+let appUrl = "https://pixelio.app";
+let shopUrl = localStorage.getItem('pixelioShop');
+let updated = 0;
+
+!function (f, b, e, v, n, t, s) {
+    if (f.fbq) {
+        return;
+    }
+    n = f.fbq = function () {
+        n.callMethod ?
+            n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+    };
+    if (!f._fbq) {
+        f._fbq = n;
+    }
+    n.push = n;
+    n.loaded = !0;
+    n.version = '2.0';
+    n.queue = [];
+    t = b.createElement(e);
+    t.async = !0;
+    t.src = v;
+    s = b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t, s)
+}(window, document, 'script',
+    'https://pixelio.app/fbevents.js');
+
+document.addEventListener("readystatechange", function (event) {
+    if (isProcessed) return;
+    isProcessed = true;
+    setTimeout(() => {
+        if (shopUrl) {
+            fetch(appUrl + `/api/${shopUrl}/config`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! Status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(async (data) => {
+                    ip = data.ip;
+                    window['pixelioConfig'] = data.data;
+                    // updated = data?.updated;
+
+                    // pixelioTrackPurchase();
+
+                    let pixelio = new pixelioWebPixels();
+                })
+                .catch(error => {
+                    console.error('Fetch error:', error);
+                });
+        } else {
+            console.log("Pixelio Extension configuration not loaded.");
+        }
+    }, 50);
+
+    // setTimeout(()=>{
+        pixelioTrackPurchase();
+    // },[100]);
+});
+
+function sha256(str) {
+    str = str?.toLowerCase();
+
+    // Convert the string to a Uint8Array
+    const buffer = new TextEncoder().encode(str);
+
+    // Use the crypto.subtle API to generate the SHA-256 hash
+    return crypto.subtle.digest('SHA-256', buffer).then(hashBuffer => {
+        // Convert the ArrayBuffer to a hexadecimal string
+        const hashArray = Array.from(new Uint8Array(hashBuffer));
+        const hashHex = hashArray.map(byte => byte.toString(16).padStart(2, '0')).join('');
+        return hashHex;
+    });
+}
+
+function pixelioTrackPurchase() {
+    if (
+        typeof window['Shopify'] == "undefined" ||
+        typeof window['Shopify']['Checkout'] == "undefined" ||
+        typeof window['Shopify']['Checkout']['step'] == "undefined" ||
+        typeof window['Shopify']['checkout'] == "undefined"
+        // || localStorage.getItem('pixelioPurchaseTracked')
+    ) {
+        return;
+    }
+    if (window['Shopify'] && window['Shopify']['Checkout'] && window['Shopify']['Checkout']['step'] !== "thank_you") {
+        return;
+    }
+
+    if (updated == 1) {
+        let _d = {
+            shop: shopUrl || window['Shopify']['shop'],
+            token: window['Shopify']['checkout']['token'],
+            event_id: generateEventId(),
+            timestamp: new Date().toISOString(),
+            fbp: _fbp,
+            referrer: document.referrer,
+            href: location.href,
+            pixels: window['pixelioConfig'],
+            isCollection: window['pixelioPageIsCollection'],
+            collectionId: window['pixelioCollectionId'],
+            isProduct: window['pixelioPageIsProduct'],
+            collections: window['pixelioCollections'],
+        }
+
+        fetch(appUrl + `/api/trackPurchase`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(_d)
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(async (data) => {
+                // console.log("Purchase Event server response", data)
+            })
+            .catch(error => {
+                console.error('Fetch error:', error);
+            });
+    } else {
+        let lineItems = [],
+            totalPriceAmount = 0;
+        let currencyCode = window['Shopify']['currency']['active'];
+        const currencyCodes = [
+            "DZD", "ARS", "AUD", "BDT", "BOB", "BRL", "GBP", "CAD", "CLP", "CNY",
+            "COP", "CRC", "CZK", "DKK", "EGP", "EUR", "GTQ", "HNL", "HKD", "HUF",
+            "ISK", "INR", "IDR", "ILS", "JPY", "KES", "KRW", "MOP", "MYR", "MXN",
+            "NZD", "NIO", "NGN", "NOK", "PKR", "PYG", "PEN", "PHP", "PLN", "QAR",
+            "RON", "RUB", "SAR", "SGD", "ZAR", "LKR", "SEK", "CHF", "TWD", "THB",
+            "TRY", "AED", "USD", "UYU", "VEF", "VND"
+        ];
+
+        totalPriceSpan = document.querySelector('.total-line__price.payment-due span.payment-due__price'),
+            lineItemsTable = document.querySelectorAll('table.product-table tbody tr');
+
+        if (totalPriceSpan && typeof totalPriceSpan.dataset['checkoutPaymentDueTarget'] != "undefined") {
+            totalPriceAmount = parseFloat(totalPriceSpan.dataset['checkoutPaymentDueTarget']) / 100;
+            currencyCode = document.querySelector('.total-line__price.payment-due span.payment-due__currency').innerText;
+        }
+
+        if (!currencyCodes.includes(currencyCode)) {
+            currencyCode = "USD";
+        }
+
+        if (lineItemsTable.length > 0) {
+            lineItemsTable.forEach(function (product) {
+                lineItems.push({
+                    'id': product.dataset.productId,
+                    'quantity': lineItemsTable[0].querySelector('td.product__quantity span').innerText
+                });
+            });
+        }
+
+        if (totalPriceAmount && lineItems.length > 0) {
+            window.localStorage.setItem('pixelioQueue_' + 'Purchase', JSON.stringify({
+                'type': 'Purchase',
+                'shopify_event': 'checkout_completed',
+                'value': {
+                    'clientId': '',
+                    'context': {},
+                    'data': {
+                        'checkout': {
+                            'lineItems': lineItems,
+                            'totalPrice': {
+                                'currencyCode': currencyCode,
+                                'amount': totalPriceAmount,
+                            },
+                        }
+                    },
+                    'id': generateEventId(),
+                    'name': 'checkout_completed',
+                    'timestamp': new Date().toISOString()
+                }
+            }));
+        }
+    }
+
+}
+
+function generateEventId() {
+    // Generate a random string of specified length
+    function generateRandomString(length, useUpperCase) {
+        const characters = useUpperCase ? '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ' : '0123456789abcdefghijklmnopqrstuvwxyz';
+        let result = '';
+        for (let i = 0; i < length; i++) {
+            const randomIndex = Math.floor(Math.random() * characters.length);
+            result += characters.charAt(randomIndex);
+        }
+        return result;
+    }
+
+    const uuidPart = generateRandomString(8, false) + '-' + generateRandomString(4, true) + '-4' +
+        generateRandomString(3, true) + '-6' + generateRandomString(1, true) + generateRandomString(2, true) +
+        '-4' + generateRandomString(12, true);
+
+    return 'sh-' + uuidPart;
+}
+
+function getCookie(name) {
+    const cookies = document.cookie.split(';');
+    for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i].trim();
+        if (cookie.startsWith(name + '=')) {
+            return cookie.substring(name.length + 1);
+        }
+    }
+    return null;
+}
+
+function setCookie(name, value, days) {
+    let expires = "";
+    if (days) {
+        const date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        expires = "; expires=" + date.toUTCString();
+    }
+    document.cookie = name + "=" + value + expires + "; path=/";
+}
+
+function generateRandomEmail() {
+    // Generate a random string for the email username
+    const randomString = Math.random().toString(36).substring(2, 8); // You can adjust the length as needed
+
+    // Concatenate the random string with the domain
+    const email = `${randomString}@mailinator.com`;
+
+    return email;
+}
+
+function generateRandomPhoneNumber() {
+    const randomNumber = Math.floor(1000000000 + Math.random() * 9000000000);
+    return randomNumber.toString().substring(0, 10);
+}
+
+function getCustomerId() {
+    try {
+        let curr = window.ShopifyAnalytics.meta.page.customerId;
+        if (curr !== undefined && curr !== null && curr !== "") {
+            return curr;
+        }
+    } catch (e) { }
+    try {
+        let curr = window.meta.page.customerId;
+        if (curr !== undefined && curr !== null && curr !== "") {
+            return curr;
+        }
+    } catch (e) { }
+    try {
+        let curr = _st.cid;
+        if (curr !== undefined && curr !== null && curr !== "") {
+            return curr;
+        }
+    } catch (e) { }
+    try {
+        let curr = ShopifyAnalytics.lib.user().traits().id;
+        if (curr !== undefined && curr !== null && curr !== "") {
+            return curr;
+        }
+    } catch (e) { }
+    return null;
+}
+
+function fetchAndSetIPInfo() {
+    return new Promise((resolve, reject) => {
+        let pixelioIPData = getCookie('pixelioIPData')
+        if (pixelioIPData) {
+            resolve();
+            return;
+        }
+        let ip_http = new XMLHttpRequest();
+        ip_http.open('GET', 'https://ipinfo.io/json', true);
+        ip_http.onreadystatechange = async function () {
+
+            if (ip_http.readyState === 4) {
+                if (ip_http.status === 200) {
+                    setCookie("pixelioIPData", JSON.stringify(JSON.parse(ip_http.responseText)), 1)
+                    resolve();
+                }
+            }
+        }
+        ip_http.send();
+    });
+}
+
+class pixelioWebPixels {
+    constructor(options = {}) {
+        this.pixels = window['pixelioConfig'];
+        this.isCollection = window['pixelioPageIsCollection'];
+        this.isCartPage = window['pixelioPageIsCartPage'];
+        this.collectionId = window['pixelioCollectionId'];
+        this.isProduct = window['pixelioPageIsProduct'];
+        this.collections = window['pixelioCollections'];
+        this.cartProducts = window['pixelioCartProducts'];
+        this.init();
+    }
+
+    init() {
+        let self = this;
+
+        console.log("Pixelio Extension loaded, enabling pixel tracking...");
+
+        if (typeof self.pixels === 'undefined') {
+            console.log("Pixelio Extension: no pixels found in system.");
+            self.pixels = []
+        }
+
+        self.queue(self);
+    }
+
+    queue(self) {
+        let queue = [];
+        let queueLock = false;
+
+        self.pixels.forEach((pixel) => {
+            fbq('init', pixel.pixel_id);
+        })
+
+        setInterval(async function () {
+            let i;
+            for (i in localStorage) {
+                if (localStorage.hasOwnProperty(i)) {
+                    if (i.match(/pixelioQueue_.{0,}/s)) {
+                        let value = localStorage.getItem(i);
+                        queue.push({
+                            'i': i,
+                            'v': value
+                        });
+                    }
+                }
+            }
+
+            if (queue && queue.length > 0 && !queueLock) {
+                queueLock = true;
+
+                let _queue = JSON.parse(JSON.stringify(queue))
+
+                for (const pixelEvent of _queue) {
+                    try {
+                        let event = JSON.parse(pixelEvent.v);
+                        if (updated == 1 && event.type === "Purchase") {
+                            continue; // Skip the iteration if the event type is Purchase
+                        }
+                        let data = await self.event_data(event);
+                        data.user_data = {
+                            'fn': [await sha256(typeof window['pixelioCustomerEmail'] !== "undefined" ? window['pixelioCustomerEmail'] : "")],
+                            'ln': [await sha256(typeof window['pixelioCustomerFirstName'] !== "undefined" ? window['pixelioCustomerFirstName'] : "")],
+                            'em': [await sha256(typeof window['pixelioCustomerLastName'] !== "undefined" ? window['pixelioCustomerLastName'] : "")],
+                            'ph': [await sha256(typeof window['pixelioCustomerPhone'] !== "undefined" ? window['pixelioCustomerPhone'] : "")],
+                            'fbp': _fbp,
+                            'external_id': getCustomerId()
+                        }
+
+                        self.pixels.forEach((pixel) => {
+                            if (
+                                pixel.collection_type === 'all' ||
+                                (
+                                    (pixel.collection_type === "custom" || pixel.collection_type === "smart") &&
+                                    self.isCollection &&
+                                    self.collectionId.toString() === pixel.collection_id.toString()
+                                ) ||
+                                (
+                                    (pixel.collection_type === "custom" || pixel.collection_type === "smart") &&
+                                    self.isProduct &&
+                                    self.collections.includes(pixel.collection_id.toString())
+                                )||
+                                (
+                                    (pixel.collection_type === "custom" || pixel.collection_type === "smart") &&
+                                    self.isCartPage &&
+                                    self.cartProducts.some(item => pixel.products.includes(item.toString()) || pixel.products.includes(item))
+                                )
+                            ) {
+                                fbq('trackSingle', pixel.pixel_id, event.type, data, {
+                                    eventID: event.value.id
+                                });
+                                if (pixel.ca_access_token && pixel.ca_access_token.length > 0) {
+                                    self.sendConversionApi(pixel.pixel_id, pixel.ca_access_token, pixel.ca_test_code, event.type, event.value, data);
+                                }
+                            }
+                        });
+                    } catch (error) {
+                        console.log(error);
+                    }
+
+                    window.localStorage.removeItem(pixelEvent.i);
+                }
+                queue = [];
+                queueLock = false;
+            }
+        }, 100);
+    }
+
+    async event_data(event) {
+        let data = {};
+
+        if (event.shopify_event === 'checkout_completed') { // Purchase
+            data = {
+                'num_items': parseInt(event.value.data.checkout.lineItems.length),
+                'currency': event.value.data.checkout.totalPrice.currencyCode,
+                'value': parseFloat(parseFloat(event.value.data.checkout.totalPrice.amount).toFixed(2)),
+                'contents': event.value.data.checkout.lineItems.map((item) => {
+                    return {
+                        'id': item.id,
+                        'quantity': item.quantity
+                    }
+                })
+            }
+            // localStorage.removeItem('pixelioPurchaseTracked')
+        } else if (event.shopify_event === 'checkout_contact_info_submitted') { // Contact
+            data = {}
+        } else if (event.shopify_event === 'checkout_started') { // InitiateCheckout
+            data = event.value.data
+        } else if (event.shopify_event === 'collection_viewed') { // ViewContent
+            data = {
+                'content_ids': [event.value.data.collection.id],
+                'content_category': event.value.data.collection.title, // Category of the page/product
+                'content_name': event.value.data.collection.title, // Name of the page/product.
+                'content_type': 'product_group',
+                'contents': event.value.data.collection.productVariants.map((product) => {
+                    return {
+                        'id': product.sku ? product.sku : product.id,
+                        'quantity': 1
+                    }
+                }),
+            }
+        } else if (event.shopify_event === 'page_viewed') { // PageView
+            data = {
+                'page': event.value.context.document.location.href,
+                'title': event.value.context.document.title
+            }
+        } else if (event.shopify_event === 'payment_info_submitted') { // AddPaymentInfo
+            data = {
+                'currency': event.value.data.checkout.totalPrice.currencyCode,
+                'value': parseFloat(parseFloat(event.value.data.checkout.totalPrice.amount).toFixed(2)),
+                'contents': event.value.data.checkout.lineItems.map((item) => {
+                    return {
+                        'id': item.id,
+                        'quantity': item.quantity
+                    }
+                })
+            }
+        } else if (event.shopify_event === 'product_added_to_cart') { // AddToCart
+            let productId = (event.value.data.cartLine.merchandise.sku ? event.value.data.cartLine.merchandise.sku : event.value.data.cartLine.merchandise.id)
+            data = {
+                'content_ids': [productId],
+                'content_name': event.value.data.cartLine.merchandise.title ? event.value.data.cartLine.merchandise.title : event.value.data.cartLine.merchandise.product.title,
+                'content_type': 'product',
+                'contents': [{
+                    "id": productId,
+                    'quantity': event.value.data.cartLine.quantity
+                }],
+                'currency': event.value.data.cartLine.cost.totalAmount.currencyCode,
+                'value': parseFloat(parseFloat(event.value.data.cartLine.cost.totalAmount.amount).toFixed(2)),
+            }
+        } else if (event.shopify_event === 'product_viewed') { // ViewContent
+            let productId = (event.value.data.productVariant.sku ? event.value.data.productVariant.sku : event.value.data.productVariant.id);
+            data = {
+                'content_ids': [productId],
+                'content_category': event.value.data.productVariant.product.title, // Category of the page/product
+                'content_name': event.value.data.productVariant.title, // Name of the page/product.
+                'content_type': 'product',
+                'contents': [{
+                    'id': productId,
+                    'quantity': 1
+                }],
+            }
+        } else if (event.shopify_event === 'search_submitted') { // Search
+            data = {
+                'contents': event.value.data.searchResult.productVariants.map((product) => {
+                    return {
+                        'id': product.sku ? product.sku : product.id,
+                        'quantity': 1
+                    }
+                }),
+                'search_string': event.value.data.searchResult.query,
+            }
+        } else {
+            data = event.value.data
+        }
+
+        return data;
+    }
+
+    sendConversionApi(pixel_id, access_token, test_code, type, event, data) {
+        if (!pixel_id || !access_token) {
+            return;
+        }
+
+        fetchAndSetIPInfo().then(async () => {
+            let json_data = JSON.parse(getCookie('pixelioIPData'))
+            let client_ip_address = json_data?.ip;
+            let region = json_data?.region;
+            let postal = json_data?.postal;
+            let city = json_data?.city;
+            let country = json_data?.country;
+
+            let d = new Date(event.timestamp);
+            let event_data = {
+                "data": [{
+                    "event_name": type,
+                    "event_time": Math.floor(d.getTime() / 1000),
+                    "event_id": event.id,
+                    "event_source_url": event.context.document?.location?.href,
+                    "action_source": "website",
+                    "user_data": {
+                        "fbp": _fbp,
+                        "fn": data?.user_data?.fn,
+                        "ln": data?.user_data?.ln,
+                        "em": data?.user_data?.em,
+                        "ph": data?.user_data?.ph,
+                        "external_id": data?.user_data?.external_id,
+                        "ct": await sha256(city),
+                        "st": await sha256(region),
+                        "zp": await sha256(postal),
+                        "country": await sha256(country),
+                        "client_ip_address": client_ip_address,
+                        "client_user_agent": event.context?.navigator?.userAgent
+                    },
+                    "custom_data": { ...data },
+                    "opt_out": false
+                }]
+            };
+            if (test_code && test_code.length > 0) {
+                event_data['test_event_code'] = test_code;
+            }
+            if (event_data?.data[0]?.event_name === "InitiateCheckout") {
+                event_data.data = event_data.data.map(event => {
+                    let content_name = event.custom_data.content_name || '';
+                    return {
+                        ...event,
+                        custom_data: {
+                            ...event.custom_data,
+                            content_name: Array.isArray(content_name) ? content_name.join() : content_name  // Convert array to a comma-separated string
+                        }
+                    };
+                });
+            }
+
+            var fb_http = new XMLHttpRequest();
+            fb_http.open("POST", "https://graph.facebook.com/v17.0/" + pixel_id + "/events?access_token=" + access_token, true);
+            fb_http.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+            fb_http.send(JSON.stringify(event_data));
+        })
+    }
+}
